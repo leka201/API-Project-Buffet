@@ -1,0 +1,25 @@
+POST http://localhost:3000/user  HTTP/1.1
+Content-Type: application/json
+
+{
+    "login": "Vitor Amaro80",
+    "birthofdate": "2006-28-06",
+    "password": "28062006"
+}
+
+###
+GET http://localhost:3000/user HTTP/1.1
+Content-Type: application/json
+
+###
+PUT http://localhost:3000/user/2  HTTP/1.1
+Content-Type: application/json
+
+{
+    "login": "jorge",
+    "password": "28062006"
+}
+
+###
+DELETE http://localhost:3000/user/2 HTTP/1.1
+Content-Type: application/json
