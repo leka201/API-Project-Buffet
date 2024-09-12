@@ -1,0 +1,27 @@
+### type create - protocolo http - endereço:porta - rota do objeto
+POST http://localhost:3000/party HTTP/1.1
+Content-Type: application/json
+
+{
+    "type": "Festa adolescente",
+    "decorations": "Futebol",
+    "items": "cadeiras e mesas",
+    "food": "salgada"
+}
+
+###
+GET http://localhost:3000/party HTTP/1.1
+Content-Type: application/json
+
+###
+PUT http://localhost:3000/party/0 HTTP/1.1
+Content-Type: application/json
+
+{
+ "type": "festa adulto",
+ "food": "refrigerante"
+}
+
+###
+DELETE http://localhost:3000/party/1 HTTP/1.1
+Content-Type: application/json
