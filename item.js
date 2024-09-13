@@ -5,7 +5,8 @@ const port = 3000;
 app.use(express.json());
  
 var itens = []
-function create_item(name ,price){
+
+function create_item(name ,price , color, dimenson ){
     let id = 0
     if (itens .length > 0 ) id = itens [itens.length -1].id +1
 
@@ -13,13 +14,15 @@ function create_item(name ,price){
         "id": id,
         "name": name,
         "price": price,
-      
+        "color": color,
+        "dimenson": dimenson
+              
     }
-    itens.push(item)
-    return item
+        itens.push(item)
+        return item
 }
 
-function up_id(id,name,price){
+function up_id(id,name,price, color , dimenson){
   let idx =  itens.findIndex(item => item.id == id)
 
   if(idx == -1 ){
@@ -29,6 +32,10 @@ function up_id(id,name,price){
   if(name) itens[idx].name = name
 
   if(price) itens[idx].price = price
+
+  if(color) itens[idx].color = color
+
+  if(dimenson) itens[idx].dimenson = dimenson
    
   return{status : 200 , msg: itens[idx]}
 }
@@ -49,29 +56,29 @@ function delete_item(id){
 
 
 app.post("/item", (req, res) => {
-    const {name,price} = req.body
+    const {name,price , color , dimenson} = req.body
  
-    if(!name || ! price){
+    if(!name || ! price || ! color ||! dimenson){
         return res.status(400).json({ message: 'Os items não foram cadastrado!'})
         
     }
  
-    const item = create_item(name ,price)
+    const item = create_item(name ,price ,color, dimenson)
     return res.status(200).json({ message: 'Sucesso itens cadastrado ', itens: item})
  
 } )
 
 app.get("/item", (req, res) => {
     
-    return res.status(200).json({ message: 'Sucesso itens cadastrado ', itens: itens})
+    return res.status(200).json({ message: 'Sucesso itens encontrado ', itens: itens})
  
 } )
 
 app.put("/item/:id",(req, res) =>{
     const id = parseInt(req.params.id)
-    const {name,price} = req.body
+    const {name ,price ,color, dimenson} = req.body
 
-    let retorno = up_id(id,name,price)
+    let retorno = up_id(id,name ,price ,color, dimenson)
     return res.status(retorno.status).json(retorno.msg)
 
 } )
@@ -80,11 +87,11 @@ app.put("/item/:id",(req, res) =>{
 app.delete("/item/:id" ,(req,res) =>{
     const id = parseInt(req.params.id)
     if(delete_item(id)){
-        return res.status(201).json("foi de base")
+        return res.status(201).json("Deletado")
 
     }
     else {
-        return res.status(404).json("n encontrou")
+        return res.status(404).json("Não encontrou")
 
     }
                         
