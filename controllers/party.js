@@ -18,6 +18,10 @@ function create_party(type, decorations, items, food){
 
     return party}
 
+function read_party(){
+    return partys;
+}
+
 function update_party(id,type,food){
 
     let idx = partys.findIndex(party => party.id === id)
@@ -41,3 +45,9 @@ function delete_party (id){
     return true
 }
 
+module.exports = {
+    create_party,
+    read_party,
+    update_party,
+    delete_party
+}
