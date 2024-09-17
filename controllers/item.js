@@ -15,7 +15,7 @@ function create_item(name ,price , color, dimenson ){
         itens.push(item)
         return item
 }
-function read_item{
+function read_item(){
     return itens
 }
 
