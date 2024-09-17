@@ -6,6 +6,7 @@ const express = require ('express');
 const app = express(); //é um construtor
 const port = 3000; //rota de teste de api
 app.use(express.json()); //fala q ele vai usar esse construtor
+const cuser = require('./controllers/partys')
 
 //vai ir para um controlador
 
