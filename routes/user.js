@@ -2,9 +2,6 @@ const express = require('express')
 const router = express.Router()
 const cuser = require('../controllers/user')
 
-
-
-
 router.post("/create", ( req, res ) => {
     const {login, password } = req.body   
 
