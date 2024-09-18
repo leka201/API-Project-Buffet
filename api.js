@@ -23,10 +23,8 @@ app.use("/item", item)
 
 
 //vitor
-
-app.get("/", (req, res)=>{
-    return res.status(200).json("Hello")
-})
+ const ruser = require ('./routes/user')
+ app.use('/user', ruser)
 
 app.listen(port, () => {
     console.log(`Run: http://localhost:${port}`);
