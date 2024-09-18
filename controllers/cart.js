@@ -5,6 +5,7 @@ function create_cart(items ,client_id){
     if (carts.length > 0 ) id = carts[carts.length -1].id +1
  
     const cart = {
+        "id": id,
         "itens": items,
         "IDcliente": client_id
       
@@ -23,14 +24,14 @@ function up_id(id,name,price){
   let idx =  carts.findIndex(cart => cart.id == id)
  
   if(idx == -1 ){
-    return {status:404, msg: "Não accarthei "}
+    return {status:404, msg: "não tem item "}
   }
  
   if(name) carts[idx].name = name
  
   if(price) carts[idx].price = price
    
-  return{status : 200 , msg: cart[idx]}
+  return{status : 200 , msg: carts[idx]}
 }
 
 function delete_cart(id){
