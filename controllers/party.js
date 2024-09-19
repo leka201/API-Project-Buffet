@@ -1,4 +1,8 @@
+const Party = require('../models/party')
 var partys =[]
+
+
+
 function create_party(type, decorations, items, food){  
 
     //logica de validação dos dados.
@@ -6,13 +10,7 @@ function create_party(type, decorations, items, food){
     let id = 0
     if(partys.length > 0){id = partys[partys.length -1].id+1}
 
-    const party ={
-        "id": id,
-        "type": type,
-        "decorations":decorations,
-        "items":items,
-        "food": food
-    }
+    const party = new Party(id, type, decorations, items, food)  // especifica um objeto e o coloca dentro de uma variavel 
 
     partys.push(party)
 
