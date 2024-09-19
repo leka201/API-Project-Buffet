@@ -3,6 +3,14 @@ const app = express()
 const port = 3000
 app.use(express.json())
 
+const sequelize = require('./config/database')
+
+sequelize.authenticate().then(
+    ()=>console.log("Banco conectado")
+).catch(
+    err => console.error("Erro bd:", err)
+)
+
 const rparty = require('./routes/party')
 app.use('/party', rparty)
 
