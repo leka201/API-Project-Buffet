@@ -1,18 +1,14 @@
+const User = require('../models/user')
 var users = []
-function  create_users (login, password, birthofdate  ){
+function  create_users (name, password){
 
     let id= 0
 
     if(users.length > 0)
             id = users[users.length-1].id +1
 
+    const user = new User(id, name, password)
 
-    const user = {   
-        "id":id,
-        "login":login,
-        "password": password,
-        "birthofdate": birthofdate
-    }
     users.push(user)
     return users
 }
