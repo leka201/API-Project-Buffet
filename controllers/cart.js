@@ -1,15 +1,11 @@
+const Cart = require('../models/cart')
 
 var carts = []
 function create_cart(items ,client_id){
     let id = 0
     if (carts.length > 0 ) id = carts[carts.length -1].id +1
  
-    const cart = {
-        "id": id,
-        "itens": items,
-        "IDcliente": client_id
-      
-    }
+    const cart = new Cart(id, items, client_id)
 
     
     carts.push(cart)
