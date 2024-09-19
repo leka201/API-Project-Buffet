@@ -1,19 +1,13 @@
+const Item = require ("../models/item")
 var itens = []
 
 function create_item(name ,price , color, dimenson ){
     let id = 0
     if (itens .length > 0 ) id = itens [itens.length -1].id +1
 
-    const item = {
-        "id": id,
-        "name": name,
-        "price": price,
-        "color": color,
-        "dimenson": dimenson
-              
-    }
-        itens.push(item)
-        return item
+    const item = new Item (id, name,price,color ,dimenson)
+    itens.push(item)
+    return item
 }
 function read_item(){
     return itens

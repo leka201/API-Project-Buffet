@@ -3,6 +3,7 @@ POST http://localhost:3000/item/create HTTP/1.1
 Content-Type: application/json
  
 {
+    "id" : "0",
     "name": "conjunto de mesa com 4 cadeiras ",
     "price": "R$ 8,00" ,
     "color": "Branca", 
@@ -16,7 +17,7 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:3000/item/upd/1 HTTP/1.1
+PUT http://localhost:3000/item/upd/0 HTTP/1.1
 Content-Type: application/json
  
 {
