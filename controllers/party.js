@@ -1,45 +1,41 @@
 const Party = require('../models/party')
-var partys =[]
 
-
-
-function create_party(type, decorations, items, food){  
+ async function create_party(type, decorations, items, food){  
 
     //logica de validação dos dados.
 
-    let id = 0
-    if(partys.length > 0){id = partys[partys.length -1].id+1}
+    const party = await Party.create({type, decorations, items, food})  // especifica um objeto e o coloca dentro de uma variavel 
 
-    const party = new Party(id, type, decorations, items, food)  // especifica um objeto e o coloca dentro de uma variavel 
-
-    partys.push(party)
-
-    return party}
-
-function read_party(){
-    return partys;
+    return party
 }
 
-function update_party(id,type,food){
+ async function read_party(){
+    return await Party.findAll;
+}
 
-    let idx = partys.findIndex(party => party.id === id)
+ async function update_party(id,type,food){
 
-    if (idx == -1){
+    const party = await Party.findByPk(id)
+
+    if (!party){
         return {status: 404, msg: "Não encontrado"}}
 
-    if(type)partys[idx].type = type
-    if(food)partys[idx].food = food
+    if(type)party.type = type
+    if(food)party.food = food
+
+    await party.save()
 
     return {status: 200, msg: partys[idx]}
 }
 
-function delete_party (id){
-    let idx = partys.findIndex(party => party.id === id )
-    if(idx == -1){
-        return false
+ async function delete_party (id){
+    const party = await Party.findByPk(id)
+    if(!party){
+        return {status: 404, msg: "Não encontrado"}
     }
 
-    partys.splice(idx, 1)
+    await party.destroy()
+
     return true
 }
 
