@@ -1,42 +1,39 @@
 const Item = require ("../models/item")
 var itens = []
 
-function create_item(name ,price , color, dimenson ){
-    let id = 0
-    if (itens .length > 0 ) id = itens [itens.length -1].id +1
+async function create_item(name ,price , color, dimenson ){
+    const item = await Item.create ({name,price,color ,dimenson})
 
-    const item = new Item (id, name,price,color ,dimenson)
-    itens.push(item)
     return item
 }
-function read_item(){
-    return itens
+ async function read_item(){
+    return await  itens.findAll()
 }
 
-function up_id(id,name,price, color , dimenson){
-  let idx =  itens.findIndex(item => item.id == id)
+async function up_id(id,name,price, color , dimenson){
+  const item = await item.findByPK(id)
 
-  if(idx == -1 ){
+  if(!item ){
     return {status:404, msg: "Não achei "}
   }
 
-  if(name) itens[idx].name = name
+  if(name) item.name = name
+  if(price) item.price = price
+  if(color) item.color = color
+  if(dimenson) item.dimenson = dimenson
 
-  if(price) itens[idx].price = price
-
-  if(color) itens[idx].color = color
-
-  if(dimenson) itens[idx].dimenson = dimenson
-   
-  return{status : 200 , msg: itens[idx]}
+  await item.save()
+  return{status : 200 , msg: item}
 }
 
-function delete_item(id){
-    let idx = itens.findIndex(item =>item.id === id ) 
-    if(idx == -1){
+ async function delete_item(id){
+
+    const item = await item.findByPK(id)
+
+    if(item){
         return false
     }
-    itens.splice(idx , 1 )
+    await item.destroy()
     return true
 }
 
