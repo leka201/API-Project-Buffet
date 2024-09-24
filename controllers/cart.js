@@ -1,41 +1,41 @@
 const Cart = require('../models/cart')
 
 var carts = []
-function create_cart(items ,client_id){
-    let id = 0
-    if (carts.length > 0 ) id = carts[carts.length -1].id +1
+async function create_cart( items ,client_id){
  
-    const cart = new Cart(id, items, client_id)
+    const cart = await Cart.create(id,items, client_id)
 
     
     carts.push(cart)
     return cart
 }
 
-function read_cart(){
-    return carts
+async function read_cart(){
+    return await Cart.findAll()
 }
  
-function up_id(id,name,price){
-  let idx =  carts.findIndex(cart => cart.id == id)
+async function up_id(id,items ,client_id){
+  let cart =  await Cart.findByPk(id)
  
-  if(idx == -1 ){
+  if(!cart){
     return {status:404, msg: "não tem item "}
   }
  
-  if(name) carts[idx].name = name
+  if(items) cart.items = items
  
-  if(price) carts[idx].price = price
+  if(client_id) cart.client_id = client_id
+
+  await cart.save()
    
-  return{status : 200 , msg: carts[idx]}
+  return{status : 200 , msg: cart}
 }
 
-function delete_cart(id){
-    let idx = carts.findIndex(cart=> cart.id === id)
-    if(idx == -1){
+async function delete_cart(id){
+    let cart = await Cart.findByPk(id)
+    if(cart){
         return false
     }
-    carts.splice(idx, 1)
+    await cart.destroy()
     return true
 }
 
