@@ -1,9 +1,9 @@
 const Cart = require('../models/cart')
 
 var carts = []
-async function create_cart( items ,client_id){
+async function create_cart( items ,clientId){
  
-    const cart = await Cart.create(id,items, client_id)
+    const cart = await Cart.create({clientId})
 
     
     carts.push(cart)

@@ -1,7 +1,7 @@
 // class sempre tem um construtor(que é uma função)
 'use strict'
 const {Model, DataTypes} = require('sequelize')
-const sequelize = require ('..config/database')
+const sequelize = require ('../config/database')
 
 class Party extends Model {}
 

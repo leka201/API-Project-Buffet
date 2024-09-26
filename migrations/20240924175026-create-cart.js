@@ -8,19 +8,15 @@ async function up (queryInterface, Sequelize) {
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-    items: {
-      allowNull: false,
-      type: Sequelize.STRING
-    },
     clientId: {
       allowNull: false,
       type: Sequelize.INTEGER
     },
-    createAt: {
+    createdAt: {
       allowNull: false,
       type: Sequelize.DATE
     },
-    updateAt: {
+    updatedAt: {
       allowNull: false,
       type: Sequelize.DATE
     }

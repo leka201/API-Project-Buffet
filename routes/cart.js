@@ -14,6 +14,7 @@ router.post("/create", (req, res) => {
     }
 
     const cart = ccart.create_cart(items, client_id)
+    console.log(cart)
     return res.status(200).json({ message: 'Sucesso!', cart: cart})
 
 } )

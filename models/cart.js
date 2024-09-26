@@ -5,12 +5,18 @@ const sequelize = require('../config/database')
 class Cart extends Model{}
 
 Cart.init({
-    items: DataTypes.STRING,
-    client_id: DataTypes.STRING
+    id:{
+        primaryKey:true,
+        type: DataTypes.INTEGER,
+        allowNull:false,
+        autoIncrement:true
+    },
+    clientId: DataTypes.STRING
 
 },{
     sequelize, 
-    modelName : 'Cart'
+    modelName : 'Cart',
+    timesTamps:true
 })
 
     
