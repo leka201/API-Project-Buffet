@@ -1,45 +1,46 @@
+const { AsyncLocalStorage } = require('async_hooks')
 const User = require('../models/user')
-var users = []
-function  create_users (name, password){
 
-    let id= 0
 
-    if(users.length > 0)
-            id = users[users.length-1].id +1
 
-    const user = new User(id, name, password)
+async function create_users(name,pass) {
+    const user = await User.create({name,pass})
 
-    users.push(user)
-    return users
+    return user
 }
 
-function read_users (){
-    return users
+
+async function read_users(){
+
+    return await User.findAll()
+
 }
 
-function update_user(id, login, pass){
+async function update_user(id, login, pass){
+    const user = await User.findByPk(id)
 
-  let idx = users.findIndex(user => user.id === id)
-    
-    if(idx == -1) {
+
+    if(user) {
         
         return {status: 404, msg: "nao encontrado"}
     }
        
-    if(login) users[idx].login = login
-    if(pass) users[idx].pass = pass
+    if(login) user.login = login
+    if(pass) user.pass = pass
 
-    return {status: 200, msg: users[idx]}
+    return {status: 200, msg: user}
 }
 
-function delete_user(id){
-    let idx = users.findIndex(user => user.id === id)
-    if(idx == -1){
+async function delete_user(id){
+    const user = await User.findByPk(id)
+
+    if(user) {
+        
         return false
     }
-  
-    users.splice(idx, 1)
+    await user.destroyer()
     return true
+  
 }
 
 module.exports = {create_users, update_user, delete_user, read_users}

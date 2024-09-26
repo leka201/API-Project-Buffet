@@ -10,7 +10,7 @@ router.post("/create", ( req, res ) => {
     }
 
     const user = cuser.create_users (login, password)
-
+    console.log(user)
     return res.status(200).json({
         message: 'sucesso',user: user
     })
