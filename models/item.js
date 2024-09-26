@@ -6,11 +6,11 @@ class Item extends Model {}
 Item.init(
   {
     name: DataTypes.STRING, 
-    price: DataTypes.DECIMAL,
+    price: DataTypes.FLOAT,
     color: DataTypes.STRING,
-    dimension: DataTypes.STRING 
+    dimenson: DataTypes.STRING 
   },
-  { sequelize, modelName: 'Item' }
+  { sequelize, modelName: 'Item', timestamps: true,}
 );
 
 module.exports = Item; 

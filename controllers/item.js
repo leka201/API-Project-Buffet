@@ -1,5 +1,5 @@
 const Item = require ("../models/item")
-var itens = []
+
 
 async function create_item(name ,price , color, dimenson ){
     const item = await Item.create ({name,price,color ,dimenson})
@@ -7,13 +7,13 @@ async function create_item(name ,price , color, dimenson ){
     return item
 }
  async function read_item(){
-    return await  itens.findAll()
+    return await  Item.findAll()
 }
 
 async function up_id(id,name,price, color , dimenson){
-  const item = await item.findByPK(id)
+  const item = await Item.findByPK(id);
 
-  if(!item ){
+  if(!Item ){
     return {status:404, msg: "Não achei "}
   }
 
@@ -28,9 +28,9 @@ async function up_id(id,name,price, color , dimenson){
 
  async function delete_item(id){
 
-    const item = await item.findByPK(id)
+    const item = await Item.findByPk(id)
 
-    if(item){
+    if(!item){
         return false
     }
     await item.destroy()

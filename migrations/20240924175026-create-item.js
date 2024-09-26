@@ -6,7 +6,7 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     
-    await queryInterface.createTable('Itens',{
+    await queryInterface.createTable('Items',{
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,21 +19,21 @@ module.exports = {
       },
       price: {
         allowNull: false,
-        type: Sequelize.DECIMAL, 
+        type: Sequelize.FLOAT
       },
       color: {
         allowNull: false,
         type: Sequelize.STRING,
       },
       dimenson: { 
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING, 
       },
-      creatAT: {
+      createdAT: {
         allowNull: false,
         type: Sequelize.DATE, 
       },
-      updateAT: {
+      updatedAT: {
         allowNull: false,
         type: Sequelize.DATE, 
       },
@@ -42,7 +42,7 @@ module.exports = {
   async down (queryInterface, Sequelize) {
     
   
-    await queryInterface.dropTable('Itens');
+    await queryInterface.dropTable('Items');
      
   }
 };
