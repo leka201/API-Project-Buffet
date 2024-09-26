@@ -32,7 +32,7 @@ async function up_id(id,items ,client_id){
 
 async function delete_cart(id){
     let cart = await Cart.findByPk(id)
-    if(cart){
+    if(!cart){
         return false
     }
     await cart.destroy()
