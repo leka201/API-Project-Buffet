@@ -3,17 +3,13 @@ const router = express.Router()
 const cuser = require('../controllers/user')
 
 router.post("/create", ( req, res ) => {
-    const {login, password } = req.body   
+    const {login, password, cep, born, gender  } = req.body   
 
     if(!login || !password){
         return res.status(408).json({ message: 'Esses seguintes campos nao forma prenchidos: password'})
     }
 
-    const user = cuser.create_users (login, password)
-    console.log(user)
-    return res.status(200).json({
-        message: 'sucesso',user: user
-    })
+    return cuser.create_users (login, password,  cep, born, gender)
 })
 
 router.get("/read", (req, res) => {

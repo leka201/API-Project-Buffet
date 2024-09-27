@@ -12,8 +12,13 @@ User.init({
         autoIncrement: true
     },
     name: DataTypes.STRING,
-    pass: DataTypes.STRING
-},{
+    pass: DataTypes.STRING,
+    cep:  DataTypes.STRING,
+    born: DataTypes.STRING,
+    gender:DataTypes.STRING
+
+},
+{
     sequelize,
     modelName:'User',
     timesTamps:true 

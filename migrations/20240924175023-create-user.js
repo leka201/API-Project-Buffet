@@ -18,6 +18,24 @@ module.exports = {
             allowNull: false,
             type: Sequelize.STRING
         },
+        cep:{
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type:Sequelize.STRING
+        },
+        email:{
+            allowNull: false,
+            type: Sequelize.STRING
+        },
+        born:{
+            allowNull: false,
+            type: Sequelize.INTEGER
+        },
+        gender:{
+            llowNull: false,
+            type: Sequelize.INTEGER
+        },
         createdAt:{
             allowNull: false,
             type: Sequelize.DATE
