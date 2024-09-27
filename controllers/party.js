@@ -1,4 +1,4 @@
-const Party = require("../models/party")
+const Party = require('../models/party')
 
  async function create_party(type, decorations, items, food){  
 
