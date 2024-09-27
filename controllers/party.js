@@ -1,4 +1,4 @@
-const Party = require('../models/party')
+const Party = require("../models/party")
 
  async function create_party(type, decorations, items, food){  
 
@@ -10,33 +10,33 @@ const Party = require('../models/party')
 }
 
  async function read_party(){
-    return await Party.findAll;
+    return await Party.findAll();
 }
 
  async function update_party(id,type,food){
 
-    const party = await Party.findByPk(id)
+    const party = await Party.findByPk(id);
 
     if (!party){
-        return {status: 404, msg: "Não encontrado"}}
+        return {status: 404, msg: "Não encontrado"}};
 
-    if(type)party.type = type
-    if(food)party.food = food
+    if(type)party.type = type;
+    if(food)party.food = food;
 
-    await party.save()
+    await party.save();
 
-    return {status: 200, msg: partys[idx]}
+    return {status: 200, msg: partys[idx]};
 }
 
  async function delete_party (id){
-    const party = await Party.findByPk(id)
+    const party = await Party.findByPk(id);
     if(!party){
-        return {status: 404, msg: "Não encontrado"}
+        return {status: 404, msg: "Não encontrado"};
     }
 
-    await party.destroy()
+    await party.destroy();
 
-    return true
+    return true;
 }
 
 module.exports = {
@@ -44,4 +44,4 @@ module.exports = {
     read_party,
     update_party,
     delete_party
-}
+};

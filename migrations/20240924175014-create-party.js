@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -12,27 +12,21 @@ module.exports = {
       },
       decorations:{
         allowNull: false,
-        autoIncrement: false,
-        primaryKey: false,
         type: Sequelize.STRING
       },
       items:{
         allowNull: false,
-        autoIncrement: false,
-        primaryKey: false,
         type: Sequelize.STRING
       },
       food:{
         allowNull: false,
-        autoIncrement: false,
-        primaryKey: false,
         type: Sequelize.STRING
       },
       createAt:{
         allowNull:false,
         type: Sequelize.DATE
       },
-      updateAT:{
+      updateAt:{
         allowNull:false,
         type:Sequelize.DATE
       }

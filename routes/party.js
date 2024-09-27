@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const cparty = require ('../controllers/party')
-
+const Party = require ('../models/party')
 
 //vai para routes
 router.post("/create", (req,res) =>{
