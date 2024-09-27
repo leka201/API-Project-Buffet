@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const citem = require('../controllers/item')
+const Item = require('../models/item')
 
 router.post("/create", (req, res) => {
     const {name,price , color , dimenson} = req.body
@@ -9,15 +10,14 @@ router.post("/create", (req, res) => {
         return res.status(400).json({ message: 'Os itemsp não foram cadastrado!'})
         
     }
- 
-    const item = citem.create_item(name ,price ,color, dimenson)
-    return res.status(200).json({ message: 'Sucesso itens cadastrado ', itens: item})
+
+    return citem.create_item(name ,price ,color, dimenson,res)
  
 } )
 
 router.get("/read", (req, res) => {
     
-    return res.status(200).json({ message: 'Sucesso itens encontrado ', itens: citem.read_item()})
+    return res.status(200).json({ message: 'Sucesso itens encontrado ', Item: citem.read_item()})
  
 } )
 
