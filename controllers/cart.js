@@ -1,33 +1,42 @@
 const Cart = require('../models/cart')
+const User = require('../models/user')
 
-var carts = []
-async function create_cart( items ,clientId){
+async function create_cart( items ,clientId, res){
+    let user = await User.findByPk(clientId)
+
+    if(!user){
+        return res.status(404).json({
+            message: 'Usúario não encontrado'
+        })
+    }
  
     const cart = await Cart.create({clientId})
 
-    
-    carts.push(cart)
-    return cart
+    return res.status(200).json({
+        message: 'Carrinho criado', cart_created: cart
+    })
 }
 
-async function read_cart(){
-    return await Cart.findAll()
+async function read_cart(req,res){
+    let cart = await Cart.findAll()
+    return res.status(200).json({ message: 'item adicionado ', cart: cart})
 }
  
-async function up_id(id,items ,client_id){
+async function up_id(id,items , res){
   let cart =  await Cart.findByPk(id)
- 
-  if(!cart){
-    return {status:404, msg: "não tem item "}
-  }
- 
-  if(items) cart.items = items
- 
-  if(client_id) cart.client_id = client_id
 
-  await cart.save()
-   
-  return{status : 200 , msg: cart}
+  if(!cart){
+    return res.status(404).json({
+        message: 'Carrinho não encontrado'
+    })
+  }
+  
+  return res.status(200).json({
+    message: 'Sucesso',
+    carrinho_encontrado: cart
+})
+
+ 
 }
 
 async function delete_cart(id){

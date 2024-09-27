@@ -13,24 +13,16 @@ router.post("/create", (req, res) => {
         
     }
 
-    const cart = ccart.create_cart(items, client_id)
-    console.log(cart)
-    return res.status(200).json({ message: 'Sucesso!', cart: cart})
-
+    return ccart.create_cart(items, client_id, res)
 } )
  
-router.get("/read", (req, res) => {
-    
-    return res.status(200).json({ message: 'item adicionado ', cart: ccart.read_cart()})
+router.get("/read", ccart.read_cart )
  
-} )
- 
-router.put("/upgrade/:id",(req, res) =>{
+router.put("/update/:id",(req, res) =>{
     const id = parseInt(req.params.id)
-    const {name,price} = req.body
- 
-    let retorno = ccart.up_id(id,name,price)
-    return res.status(retorno.status).json(retorno.msg)
+    const {items} = req.body
+    
+    return ccart.up_id(id,items, res)
  
 } )
  
