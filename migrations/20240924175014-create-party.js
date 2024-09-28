@@ -11,15 +11,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       decorations:{
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       items:{
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       food:{
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       createAt:{
