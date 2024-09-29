@@ -6,7 +6,7 @@ const sequelize = require ('../config/database');
 class Party extends Model {};
 
 Party.init({
-    name:DataTypes.STRING
+    decorations:DataTypes.STRING
 },{
     sequelize,
     modelName:'Party'

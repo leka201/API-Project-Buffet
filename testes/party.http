@@ -3,7 +3,6 @@ POST http://localhost:3000/party/create HTTP/1.1
 Content-Type: application/json
 
 {
-    "type": "Festa adolescente",
     "decorations": "Futebol",
     "items": "cadeiras e mesas",
     "food": "salgada"
@@ -18,7 +17,6 @@ PUT http://localhost:3000/party/update/0 HTTP/1.1
 Content-Type: application/json
 
 {
- "type": "festa adulto",
  "food": "refrigerante"
 }
 

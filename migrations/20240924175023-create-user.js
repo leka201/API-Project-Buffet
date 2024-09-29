@@ -20,7 +20,7 @@ module.exports = {
         },
         cep:{
             allowNull: false,
-            autoIncrement: true,
+            autoIncrement: false,
             primaryKey: true,
             type:Sequelize.STRING
         },

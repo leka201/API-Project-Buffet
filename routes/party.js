@@ -5,15 +5,16 @@ const Party = require ('../models/party')
 
 //vai para routes
 router.post("/create", (req,res) =>{
-    const {type, decorations, items, food} = req.body
+    console.log(req.body);
+    const {decorations, items, food} = req.body
 
-    if(!type || !decorations || !items || !food){
+    if(!decorations || !items || !food){
 
         return res.status(400).json({ message: 'todos os campos são obrigatórios'}); //usar de acordo com a tabela de status http
 }
 
-    const party= cparty.create_party (type, decorations, items, food)
-
+    const party= cparty.create_party (decorations, items, food)
+     
     return res.status(200).json({ message: 'Sucesso', party: party});
 }) //req vai vim td que vc mandar no body vai estar dentro dela e a res é a resposta do req.
 
@@ -25,11 +26,11 @@ router.get ("/read", (req, res) =>{
 })
 
 
-router.put("/update/:id", (req,res) =>{
+router.put("/update/:id", async (req,res) =>{
     const id = parseInt(req.params.id)
-    const {type, food} = req.body
+    const {food} = req.body
 
-    let retorno = cparty.update_party(id, type, food)
+    let retorno =  await cparty.update_party(id, food)
     return res.status(retorno.status).json(retorno.msg)
 })
 
