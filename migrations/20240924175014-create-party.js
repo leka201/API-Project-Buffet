@@ -9,15 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       decorations: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.STRING,
       },
       items: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.STRING,
       },
       food: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.STRING,
       },
       createdAt: {  // Corrigido para "createdAt"
