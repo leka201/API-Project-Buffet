@@ -6,8 +6,19 @@ const sequelize = require ('../config/database');
 class Party extends Model {};
 
 Party.init({
-    decorations:DataTypes.STRING
-},{
+    decorations: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    items: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    food: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+}, {
     sequelize,
     modelName:'Party'
 });

@@ -14,14 +14,7 @@ router.put("/update/:id", cparty.update_party)
     
 
 //delete não tem body
-router.delete('/del/:id', (req, res) =>{
-    const id = parseInt(req.params.id)
-    if (cparty.delete_party(id)){
-        return res.status(201).json("Foi de base")
-    }else{
-        return res.status(404).json("Não encontrado")
-    }
-    
-})
+router.delete('/del/:id', cparty.delete_party)
+   
 
 module.exports = router

@@ -20,13 +20,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      createdAt: {  // Corrigido para "createdAt"
+      createdAt: {  
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       },
-      updatedAt: {  // Corrigido para "updatedAt"
+      updatedAt: {  
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       },
     });
   },
