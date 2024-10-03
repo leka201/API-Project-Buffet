@@ -11,6 +11,6 @@ router.put("/upd/:id", citem.up_id)
 
 router.delete("/del/:id" , citem.delete_item)
 
-router.get("/show_item/:id", citem.show_item)
+router.get("/show/:id", citem.show_item);
 
 module.exports = router
