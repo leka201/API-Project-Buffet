@@ -4,7 +4,7 @@ const ccart  = require('../controllers/cart')
 
 router.post("/create", ccart.create_cart )
 
-router.get("/show". ccart.show_cart)
+router.get("/show", ccart.show_cart)
  
 router.get("/read", ccart.read_cart )
  
