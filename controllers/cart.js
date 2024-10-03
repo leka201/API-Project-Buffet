@@ -1,5 +1,6 @@
 const Cart = require('../models/cart')
 const User = require('../models/user')
+const {Op} = require('sequelize')
 
 async function create_cart( req, res){
     const {items, clientId} = req.body
@@ -26,9 +27,40 @@ async function create_cart( req, res){
     })
 }
 
+async function  show_cart(req, res){
+    const id = parseInt(req.params.id)
+
+    const cart = await Cart.findByPk(id)
+
+    if(!cart){
+        return res.status(404).json({
+            message: "Não encontrado"
+        })
+    }
+
+    return res.status(202).json({
+        message: "Encontrado",
+        db: cart
+    })
+}
+
+
 async function read_cart(req,res){
-    let cart = await Cart.findAll()
-    return res.status(200).json({ message: 'item adicionado ', cart: cart})
+
+    const{clientId} = req.query
+
+    const condition = {}
+
+    if(clientId){
+        condition.clientId = {[Op.like]:`%${clientId}%`}
+    }
+
+    return res.status(200).json({ 
+        message: 'item adicionado ', db:await Cart.findAll({
+            where:Object.keys(condition).length > 0?
+            condition:undefined
+        })
+    })
 }
  
 async function up_id(req, res){
@@ -69,6 +101,7 @@ async function delete_cart(req, res){
 
 module.exports = {
     create_cart,
+    show_cart,
     read_cart,
     up_id,
     delete_cart

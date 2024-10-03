@@ -13,13 +13,17 @@ Content-Type: application/json
             "qtd":100
         }
     ],
-    "clientId": 1000000000
+    "clientId": 1
 }
 
+
 ###
-GET http://localhost:3000/cart/read HTTP/1.1
+GET http://localhost:3000/cart/read?clientId=id HTTP/1.1
 Content-Type: application/json
  
+###
+GET http://localhost:3000/cart/show/2 HTTP/1.1
+Content-Type: application/json
  
 ###
 PUT http://localhost:3000/cart/update/1 HTTP/1.1
