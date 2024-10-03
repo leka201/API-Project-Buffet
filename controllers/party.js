@@ -19,36 +19,59 @@ const Party = require('../models/party')
 }
 
    async function read_party(req, res) {
-    return res.status(200).json({ 
-        message: "Sucesso", list_party: await Party.findAll()
+    const{name} = req.query
+
+    const condition = ()
+
+    if(name) {
+        condition.name = { [Op.like]: `%${name}%`}
+    }
+
+    return res.status(200).json({
+        message: "Sucesso", db: await party.findAll({
+            where: Object.keys(condition).length > 0?
+            condition: undefined
+        })
     })
     
 }
 
  async function update_party(req, res){
 
-    let retorno =  await Party.findByPk(id);
+    try{
+        const{id}= req.params;
+        const{decorations, items, food} = req.body;
 
-    const {decorations, items, food} = req.body
+        const party = await Party.findByPk(id);
 
+        if(!party){
+            return res.status(404).json({message: "Não encontrado"});
+        }
 
-    if(decorations) retorno.decorations = decorations;
-    if(items)retorno.items = items;
-    if(food)retorno.food = food;
+        await party.update({decorations, items, food});
 
-    await retorno.save();
-
-    return res.status(retorno.status).json(retorno.msg)
-    
+        res.status(200).json(party);
+    } catch(error){
+        console.error(error);
+        res.status(500).json({message:"Erro no servidor"});
+    }
 }
 
  async function delete_party (req,res){
     
-    const id = parseInt(req.params.id)
-    if (delete_party(id)){
-        return res.status(201).json("Foi de base")
-    }else{
-        return res.status(404).json("Não encontrado")
+   try{ const{id} = req.params;
+
+   const party = await Party.findByPk(id);
+
+   if(!party){
+     return res.status(404).json({message: "Não encontrado"});
+   }
+
+   await party.destroy();
+   res.status(200).json({message: "Foi de base"})
+    } catch(error){
+        console.error(error);
+        res.status(500).json({message: "Erro no servidor"});
     }
     
 }
