@@ -10,7 +10,7 @@ router.put("/upt/:id", cuser.update_user)
 
 router.delete("/del/:id",cuser.delete_user)
 
-router.get("/show/:id")
+router.get("/show/:id", cuser.show_user)
    
 
 module.exports = router

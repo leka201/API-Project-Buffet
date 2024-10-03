@@ -1,6 +1,6 @@
 const { AsyncLocalStorage } = require('async_hooks')
 const User = require('../models/user')
-
+const {op, where} = require ("sequelize")
 
 
 async function create_users(req,res) {
@@ -78,9 +78,20 @@ async function show_user (req,res) {
     }
 
 async function read_users(req, res){
+    const {login} = req.query
+
+    const condition = {}
+    
+    
+    if(login){
+        condition.login = { [op.like]:`%${login}%`} 
+    }
+
     return res.status(200).json({
-        message: 'Sucesso',
-        lista: await User.findAll()
+        message: 'Sucesso', 
+        db: await User.findAll({
+            where: Object.keys(condition).length > 0 ? condition = undefined
+        })
     })
 }
 
