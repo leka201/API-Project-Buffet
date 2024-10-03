@@ -11,12 +11,12 @@ User.init({
         allowNull: false, 
         autoIncrement: true
     },
-    name: DataTypes.STRING,
-    pass: DataTypes.STRING,
+    login: DataTypes.STRING,
+    password: DataTypes.STRING,
     cep:  DataTypes.STRING,
-    born: DataTypes.STRING,
-    gender:DataTypes.STRING
-
+    born: DataTypes.DATE,
+    gender:DataTypes.STRING,
+    email:DataTypes.STRING
 },
 {
     sequelize,

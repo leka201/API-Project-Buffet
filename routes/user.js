@@ -2,43 +2,15 @@ const express = require('express')
 const router = express.Router()
 const cuser = require('../controllers/user')
 
-router.post("/create", ( req, res ) => {
-    const {login, password, cep, born, gender  } = req.body   
+router.post("/create", cuser.create_users)
 
-    if(!login || !password){
-        return res.status(408).json({ message: 'Esses seguintes campos nao forma prenchidos: password'})
-    }
+router.get("/read", cuser.read_users)
+    
+router.put("/upt/:id", cuser.update_user)
 
-    return cuser.create_users (login, password,  cep, born, gender)
-})
+router.delete("/del/:id",cuser.delete_user)
 
-router.get("/read", (req, res) => {
-    return res.status(200).json({
-        message: 'Sucesso',
-        lista: cuser.read_users()
-    });
-});
-
-router.put("/upt/:id", (req, res)  => {
-
-    const id = parseInt(req.params.id)
-
-    const {login, pass} = req.body
-
-    let retorno = cuser.update_user(id, login, pass)
-
-    return res.status(retorno.status).json(retorno.msg)
-
-})
-
-router.delete("/del/:id", (req, res) => {
-    const id = parseInt(req.params.id)
-    if(cuser.delete_user(id)){
-        return res.status(201).json("Foi de base")
-    }else{
-        return res.status(404).json("Não encontrado")
-    }
-
-} )
+router.get("/show/:id")
+   
 
 module.exports = router

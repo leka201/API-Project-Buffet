@@ -10,11 +10,11 @@ module.exports = {
             primaryKey: true,
             type:Sequelize.INTEGER
         },
-        name:{
+        login:{
             allowNull: false,
             type: Sequelize.STRING
         },
-        pass:{
+        password:{
             allowNull: false,
             type: Sequelize.STRING
         },
@@ -30,11 +30,11 @@ module.exports = {
         },
         born:{
             allowNull: false,
-            type: Sequelize.INTEGER
+            type: Sequelize.DATE
         },
         gender:{
             llowNull: false,
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         createdAt:{
             allowNull: false,
@@ -48,6 +48,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('Users');
   }
 };

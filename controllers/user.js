@@ -3,48 +3,47 @@ const User = require('../models/user')
 
 
 
-async function create_users(name, pass, res, cep, email, born, gender) {
-    
-    if(pass.length < 8 ){
+async function create_users(req,res) {
+    const {login, password, cep, email, born, gender} = req.body   
 
+    if(!login || !password ||!email || !cep || !born || !gender){
+        return res.status(408).json({ message: 'Esses seguintes campos nao forma prenchidos: password'})
+    }
+
+    if(password.length < 8 ){
         return res.status(301).json({
             Message: 'Essa senha tem q possuir 8 ou mais caracteres  '
         })
     }
     
-
-   if(cep.length == 8 ){
-
+    if(cep.length == 8 ){
         return res.status(301).json({
             message: 'Esse campo tem q possuir exatamente 8 carcteres'
         })
     }
-    if(email.length = '@'){
-
+    
+    if (!email.includes('@')) {
         return res.status(301).json({ 
-            message:'Obrigatorio possuir um @ nesse campo'})
+            message: 'Obrigatório possuir um @ nesse campo.'
+        });
     }
 
     if(age(born) < 18){
         return res.status(301).json({
-        message:'sua idade não é maior que 18 anos'
+            message:'sua idade não é maior que 18 anos'
         })
     }
 
-
-    if (!(gender == 'mulher' || gender== 'homem' || gender == 'outro')){
-
-        return res.status(301)({
-            message:'desculpa mas escolha um dos tres: mulher, homem, outro'
-        })
+    if (!(gender === 'mulher' || gender === 'homem' || gender === 'outro')) {
+        return res.status(400).json({
+            message: 'Desculpa, mas escolha um dos três: mulher, homem, outro'
+        });
     }
-
-        const user = await User.create({name, pass, res, cep, born, gender})
+    const user = await User.create({login, password,  cep, email,  born, gender })
 
     return res.status(200).json({
         message: 'Sucesso meu campeão',user: user
     })
-
 }
 
 function age(date) {
@@ -60,15 +59,38 @@ function age(date) {
   }
 
 
-   
+async function show_user (req,res) {
+    const id = parseInt(req.params.id)
 
-async function read_users(){
+    const user = await user.findByPk(id)
+    
+    if(!user){
+        return res.status(404).json({
+            message: "não encontrado"
+        })
+    }
 
-    return await User.findAll()
+        return res.status(202).json({
+            message: "Encontrei",
+            db:user
+        })
+        
+    }
 
+async function read_users(req, res){
+    return res.status(200).json({
+        message: 'Sucesso',
+        lista: await User.findAll()
+    })
 }
 
-async function update_user(id, login, pass){
+async function update_user(req, res){
+    const id = parseInt(req.params.id)
+
+    const {login, pass} = req.body
+
+    
+
     const user = await User.findByPk(id)
 
 
@@ -83,16 +105,17 @@ async function update_user(id, login, pass){
     return {status: 200, msg: user}
 }
 
-async function delete_user(id){
+async function delete_user(req, res){
+    const id = parseInt(req.params.id)
+   
     const user = await User.findByPk(id)
-console.log(user)
     if(!user) {
         
         return false
     }
     await user.destroy()
     return true
-  
 }
 
-module.exports = {create_users, update_user, delete_user, read_users}
+
+module.exports = {create_users, update_user, delete_user, read_users, show_user }
