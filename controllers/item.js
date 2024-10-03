@@ -1,5 +1,7 @@
 
 const Item = require("../models/item");
+const { Op } = require('sequelize');
+
 
 async function create_item(req, res) {
     const { name, price, color, dimension } = req.body;
@@ -14,12 +16,37 @@ async function create_item(req, res) {
 }
 
 
+async function show_item(req, res) {
+    const id = parseInt(req.params.id);
+
+    const item = await Item.findByPk(id);
+
+    if (!item) {
+        return res.status(404).json({ message: "Não encontrei" });
+    }
+    
+    return res.status(200).json({
+        message: "Achei",
+        db: item
+    });
+}
+
 
 async function read_item(req, res) {
-    const items = await Item.findAll();
+    const { color } = req.query;
 
-    return res.status(200).json({ message: 'Sucesso', itens: items });
+    const condition = {};
+    if (color) {
+        condition.color = { [Op.like]: `%${color}%` };
+    }
+
+    const items = await Item.findAll({
+        where: Object.keys(condition).length > 0 ? condition : undefined
+    });
+
+    return res.status(200).json({ message: 'Sucesso', db: items });
 }
+
 
 
 
@@ -65,5 +92,6 @@ module.exports = {
     create_item,
     up_id,
     delete_item,
-    read_item
+    read_item,
+    show_item
 };
