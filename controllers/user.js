@@ -87,10 +87,11 @@ async function read_users(req, res){
         condition.login = { [op.like]:`%${login}%`} 
     }
 
-    return res.status(200).json({
-        message: 'Sucesso', 
+    return res.status(200).json({ 
+        message: 'encontrado ', 
         db: await User.findAll({
-            where: Object.keys(condition).length > 0 ? condition = undefined
+            where:Object.keys(condition).length > 0?
+            condition:undefined
         })
     })
 }
