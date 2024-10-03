@@ -28,7 +28,7 @@ async function create_cart( req, res){
 }
 
 async function  show_cart(req, res){
-    const id = parseInt(req.params.id)
+    let id = parseInt(req.params.id)
 
     const cart = await Cart.findByPk(id)
 
@@ -77,6 +77,8 @@ async function up_id(req, res){
     
     if(items) {
         //fazer depois
+        cart.items = items; cart.items = items; 
+        await cart.save();
     }
 
     return res.status(203).json({
