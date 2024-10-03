@@ -2,16 +2,16 @@ const Party = require('../models/party')
 
  async function create_party(req, res){  
 
-    //logica de validação dos dados.
+    
 
 
     console.log(req.body);
     const {decorations, items, food} = req.body
-
     if(!decorations || !items || !food){
 
         return res.status(400).json({ message: 'todos os campos são obrigatórios'}); //usar de acordo com a tabela de status http
     }
+//logica de validação dos dados.
 
     const party = await Party.create({decorations, items, food})  // especifica um objeto e o coloca dentro de uma variavel 
      
@@ -21,7 +21,7 @@ const Party = require('../models/party')
    async function read_party(req, res) {
     const{name} = req.query
 
-    const condition = ()
+    const condition = {};
 
     if(name) {
         condition.name = { [Op.like]: `%${name}%`}
