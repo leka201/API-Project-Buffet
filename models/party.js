@@ -9,14 +9,23 @@ Party.init({
     decorations: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+            len: [16, 30]
+        }
     },
     items: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+            len: [16, 25]
+        }
     },
     food: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+            len: [13, 20]
+        }
     },
 }, {
     sequelize,

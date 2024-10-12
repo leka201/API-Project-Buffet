@@ -3,9 +3,9 @@ POST http://localhost:3000/party/create HTTP/1.1
 Content-Type: application/json
 
 {
-    "decorations": "Futebol",
-    "items": "cadeiras e mesas",
-    "food": "salgada"
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas"
 }
 
 ###
@@ -13,7 +13,7 @@ GET http://localhost:3000/party/read HTTP/1.1
 Content-Type: application/json
 
 ###
-PUT http://localhost:3000/party/update/1 HTTP/1.1
+PUT http://localhost:3000/party/update/2 HTTP/1.1
 Content-Type: application/json
 
 {
