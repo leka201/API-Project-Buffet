@@ -64,9 +64,10 @@ async function read_cart(req,res){
 }
  
 async function up_id(req, res){
+    const id = parseInt(req.params.id)
+
     let cart =  await Cart.findByPk(id)
 
-    const id = parseInt(req.params.id)
     const {items} = req.body
 
     if(!cart){
@@ -77,8 +78,7 @@ async function up_id(req, res){
     
     if(items) {
         //fazer depois
-        cart.items = items; cart.items = items; 
-        await cart.save();
+        
     }
 
     return res.status(203).json({
@@ -92,13 +92,11 @@ async function delete_cart(req, res){
     let cart = await Cart.findByPk(id)
 
     if(!cart){
-        return res.status(201).json("deletado com sucesso!")
+        return res.status(404).json("não encontrado")
     }
 
     await cart.destroy()
-    
-    return res.status(404).json("não encontrado")
-
+    return res.status(201).json("deletado com sucesso!")
 }
 
 module.exports = {

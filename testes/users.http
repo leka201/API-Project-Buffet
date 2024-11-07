@@ -3,7 +3,7 @@ POST http://localhost:3000/user/create  HTTP/1.1
 Content-Type: application/json
 
 {
-    "login": "Vitor Amaro9",
+    "login": "Vitor Amaro 3",
     "password": "28062006",
     "email": "jorge@gmail.com",
     "cep": "135732149",
