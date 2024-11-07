@@ -66,15 +66,16 @@ async function up_id(req, res) {
 }
 
 async function delete_item(req, res) {
-    const id = parseInt(req.params.id);
-    const item = await Item.findByPk(id);
+    const id = parseInt(req.params.id)
+    const item = await Item.findByPk(id)
 
-    if (!item) {
+    if (!item){
         return res.status(404).json({ message: "Não encontrou" });
     }
 
-    await item.destroy();
-    return res.status(204).json({ message: "Deletado" }); // Resposta 204 No Content
+    await item.destroy()
+    return res.status(203).json({ message: "Deletado" }); 
+
 }
 
 module.exports = {
