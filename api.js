@@ -1,7 +1,10 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const cors = require('cors')
 app.use(express.json())
+
+app.use(cors({origin: 'http://localhost:3000'}))
 
 const sequelize = require('./config/database')
 
@@ -23,6 +26,6 @@ app.use("/item", item)
 const ruser = require ('./routes/user')
 app.use('/user', ruser)
 
-app.listen(port, () => {
-    console.log(`Run: http://localhost:${port}`);
+app.listen(3000, () => {
+    console.log(`Run: http://localhost:${3000}`);
 })
