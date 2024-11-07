@@ -62,7 +62,7 @@ function age(date) {
 async function show_user (req,res) {
     const id = parseInt(req.params.id)
 
-    const user = await user.findByPk(id)
+    const user = await User.findByPk(id)
     
     if(!user){
         return res.status(404).json({
