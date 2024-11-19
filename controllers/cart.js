@@ -3,7 +3,7 @@ const User = require('../models/user')
 const {Op} = require('sequelize')
 
 async function create_cart( req, res){
-    const {items, clientId} = req.body
+    const {items, clientId,tipo_pagamento,cpf,nome_proprietario,numero_do_cartao,validade,cvv,parcelas} = req.body
 
     //array é para indicar que tem que te um vetor
     //lenght é para indicar o tamanho do vetor, que ele tem que ser maior que 0
@@ -20,7 +20,7 @@ async function create_cart( req, res){
         })
     }
  
-    const cart = await Cart.create({clientId})
+    const cart = await Cart.create({clientId,tipo_pagamento,cpf,nome_proprietario,numero_do_cartao,validade,cvv,parcelas})
 
     return res.status(200).json({
         message: 'Carrinho criado', cart_created: cart
