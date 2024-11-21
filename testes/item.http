@@ -1,5 +1,5 @@
 ###
-POST http://localhost:3000/item/create HTTP/1.1
+POST http://localhost:3001/item/create HTTP/1.1
 Content-Type: application/json
  
 {
@@ -7,22 +7,23 @@ Content-Type: application/json
     "name": "conjunto de mesa com 4 cadeiras ",
     "price":  8.00,
     "color": "Branca", 
+    "tipo": "item_mesas"
     "dimenson": "70x70x70cm"
 }
 
 ###
-GET http://localhost:3000/item/show/20 HTTP/1.1
+GET http://localhost:3001/item/show/20 HTTP/1.1
 Content-Type: application/json
 
 
 ### 
-GET http://localhost:3000/item/read HTTP/1.1
+GET http://localhost:3001/item/read HTTP/1.1
 Content-Type: application/json
 
 
 
 ###
-PUT http://localhost:3000/item/upd/9 HTTP/1.1
+PUT http://localhost:3001/item/upd/9 HTTP/1.1
 Content-Type: application/json
  
 {
@@ -32,6 +33,6 @@ Content-Type: application/json
     "dimenson":"70x70x70cm"
 }
 ###
-DELETE  http://localhost:3000/item/del/3 HTTP/1.1
+DELETE  http://localhost:3001/item/del/3 HTTP/1.1
 Content-Type: application/json
 

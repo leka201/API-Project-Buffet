@@ -26,6 +26,6 @@ app.use("/item", item)
 const ruser = require ('./routes/user')
 app.use('/user', ruser)
 
-app.listen(3000, () => {
-    console.log(`Run: http://localhost:${3000}`);
+app.listen(3001, () => {
+    console.log(`Run: http://localhost:${3001}`);
 })
