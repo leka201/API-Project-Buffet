@@ -31,7 +31,7 @@ Cart.init({
     },
     numero_do_cartão:{
         primaryKey:true,
-        type: DataTypes.INT,
+        type: DataTypes.STRING,
         allowNull:true,
         autoIncrement:false
     },
