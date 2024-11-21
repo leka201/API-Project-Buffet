@@ -3,6 +3,7 @@ const {check, validationResult} = require('express-validator')
 
  async function create_party(req, res){  
 
+    await check('nome').isLength({min: 13, max: 20}).withMessage("não é um tipo de nome para um objeto para festas").run(req)
     await check('decorations').isLength({min: 13, max: 30}).withMessage("não é um tipo de decoração").run(req)
     await check('items').isLength({min: 16, max: 25}).withMessage("não é um tipo de item para festa").run(req)
     await check('food').isLength({min: 13, max: 20}).withMessage("não é um tipo de comida").run(req)
