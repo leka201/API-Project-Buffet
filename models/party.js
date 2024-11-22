@@ -6,6 +6,15 @@ const sequelize = require ('../config/database');
 class Party extends Model {};
 
 Party.init({
+
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            len: [13, 30]
+        }
+    },
+
     decorations: {
         type: DataTypes.STRING,
         allowNull: false,

@@ -3,10 +3,10 @@ const {check, validationResult} = require('express-validator')
 
  async function create_party(req, res){  
 
-    await check('nome').isLength({min: 13, max: 20}).withMessage("não é um tipo de nome para um objeto para festas").run(req)
-    await check('decorations').isLength({min: 13, max: 30}).withMessage("não é um tipo de decoração").run(req)
-    await check('items').isLength({min: 16, max: 25}).withMessage("não é um tipo de item para festa").run(req)
-    await check('food').isLength({min: 13, max: 20}).withMessage("não é um tipo de comida").run(req)
+    await check('nome').isLength({min: 13, max: 30}).withMessage("não é um tipo de nome para um objeto para festas").run(req)
+    await check('decoracao').isLength({min: 13, max: 30}).withMessage("não é um tipo de decoração").run(req)
+    await check('itens_festa').isLength({min: 16, max: 25}).withMessage("não é um tipo de item para festa").run(req)
+    await check('comida').isLength({min: 13, max: 20}).withMessage("não é um tipo de comida").run(req)
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -14,15 +14,15 @@ const {check, validationResult} = require('express-validator')
     }
 
     console.log(req.body);
-    const {decorations, items, food} = req.body
-    if(!decorations || !items || !food){
+    const {nome, decoracao, itens_festa, comida} = req.body
+    if( !nome|| !decoracao || !itens_festa || !comida){
 
         return res.status(400).json({ message: 'todos os campos são obrigatórios'}); //usar de acordo com a tabela de status http
     }
 
-    const party = await Party.create({decorations, items, food})  // especifica um objeto e o coloca dentro de uma variavel 
+    const party = await Party.create({nome, decoracao, itens_festa, comida})  // especifica um objeto e o coloca dentro de uma variavel 
      
-    return res.status(200).json({ message: 'Sucesso', party: party});
+    return res.status(200).json({ message: 'Sucesso', party: party});   
 }
 
    async function read_party(req, res) {
@@ -47,7 +47,7 @@ const {check, validationResult} = require('express-validator')
 
     try{
         const{id}= req.params;
-        const{decorations, items, food} = req.body;
+        const{nome, decoracao, itens_festa, comida} = req.body;
 
         const party = await Party.findByPk(id);
 
@@ -55,7 +55,7 @@ const {check, validationResult} = require('express-validator')
             return res.status(404).json({message: "Não encontrado"});
         }
 
-        await party.update({decorations, items, food});
+        await party.update({ nome, decoracao, itens_festa, comida});
 
         res.status(200).json(party);
     } catch(error){
