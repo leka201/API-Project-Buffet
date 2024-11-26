@@ -1,26 +1,27 @@
 const Party = require('../models/party')
 const {check, validationResult} = require('express-validator')
+const { Op } = require('sequelize');
 
  async function create_party(req, res){  
 
-    await check('nome').isLength({min: 13, max: 30}).withMessage("não é um tipo de nome para um objeto para festas").run(req)
-    await check('decoracao').isLength({min: 13, max: 30}).withMessage("não é um tipo de decoração").run(req)
-    await check('itens_festa').isLength({min: 16, max: 25}).withMessage("não é um tipo de item para festa").run(req)
-    await check('comida').isLength({min: 13, max: 20}).withMessage("não é um tipo de comida").run(req)
+    /*await check('name').isLength({min: 13, max: 30}).withMessage("não é um tipo de nome para um objeto para festas").run(req)
+    await check('decorations').isLength({min: 13, max: 30}).withMessage("não é um tipo de decoração").run(req)
+    await check('items').isLength({min: 16, max: 25}).withMessage("não é um tipo de item para festa").run(req)
+    await check('    food').isLength({min: 13, max: 20}).withMessage("não é um tipo de     food").run(req)
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
-    }
+    }*/
 
     console.log(req.body);
-    const {nome, decoracao, itens_festa, comida} = req.body
-    if( !nome|| !decoracao || !itens_festa || !comida){
+    const {name, decorations, items, food} = req.body
+    if( !name|| !decorations || !items || !food){
 
         return res.status(400).json({ message: 'todos os campos são obrigatórios'}); //usar de acordo com a tabela de status http
     }
 
-    const party = await Party.create({nome, decoracao, itens_festa, comida})  // especifica um objeto e o coloca dentro de uma variavel 
+    const party = await Party.create({name, decorations, items, food})  // especifica um objeto e o coloca dentro de uma variavel 
      
     return res.status(200).json({ message: 'Sucesso', party: party});   
 }
@@ -30,7 +31,7 @@ const {check, validationResult} = require('express-validator')
 
     const condition = {};
 
-    if(name) {
+    if(!name) {
         condition.name = { [Op.like]: `%${name}%`}
     }
 
@@ -47,7 +48,7 @@ const {check, validationResult} = require('express-validator')
 
     try{
         const{id}= req.params;
-        const{nome, decoracao, itens_festa, comida} = req.body;
+        const{name, decorations, items,     food} = req.body;
 
         const party = await Party.findByPk(id);
 
@@ -55,7 +56,7 @@ const {check, validationResult} = require('express-validator')
             return res.status(404).json({message: "Não encontrado"});
         }
 
-        await party.update({ nome, decoracao, itens_festa, comida});
+        await party.update({ name, decorations, items,     food});
 
         res.status(200).json(party);
     } catch(error){

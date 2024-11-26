@@ -2,10 +2,10 @@
 POST http://localhost:3001/party/create HTTP/1.1
 Content-Type: application/json
 
-{   "nome": "Decoração de Futebol",
-    "decoracao": "Cesta de Futebol",
-    "itens_festa": "Cadeira Infantil",
-    "comida": "Suco de Frutas"
+{   "name": "Decoração de Futebol",
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas"
 }
 
 ###
@@ -17,10 +17,10 @@ PUT http://localhost:3001/party/update/2 HTTP/1.1
 Content-Type: application/json
 
 {
- "nome": "Decoração de Casamento com Flores",
- "decoracao": "Cesta de Futebol",
- "itens_festa": "Cadeira Infantil",
- "comida": "Suco dx Frutas"
+ "name": "Decoração de Casamento com Flores",
+ "decorations": "Cesta de Futebol",
+ "items": "Cadeira Infantil",
+ "food": "Suco dx Frutas"
 }
 
 ###

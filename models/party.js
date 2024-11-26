@@ -38,7 +38,8 @@ Party.init({
     },
 }, {
     sequelize,
-    modelName:'Party'
+    modelName:'Party',
+    timesTemp:true
 });
 
 module.exports = Party;
