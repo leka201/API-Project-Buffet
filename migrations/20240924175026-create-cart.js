@@ -9,46 +9,32 @@ async function up (queryInterface, Sequelize) {
       type: Sequelize.INTEGER
     },
     tipo_pagamento:{
-      primaryKey:true,
-      type: DataTypes.STRING,
-      allowNull:true,
-      autoIncrement:false
+      type: Sequelize.STRING,
+      allowNull:true
   },
     cpf:{
-      primaryKey:true,
-      type: DataTypes.STRING,
-      allowNull:true,
-      autoIncrement:false
+      type: Sequelize.STRING,
+      allowNull:true
   },
     nome_do_proprietario:{
-      primaryKey:true,
-      type: DataTypes.STRING,
-      allowNull:true,
-      autoIncrement:false
+      type: Sequelize.STRING,
+      allowNull:true
   },
     numero_do_cartão:{
-      primaryKey:true,
-      type: DataTypes.INT,
-      allowNull:true,
-      autoIncrement:false
+      type: Sequelize.STRING,
+      allowNull:true
   },
     validade:{
-      primaryKey:true,
-      type: DataTypes.STRING,
-      allowNull:true,
-      autoIncrement:false
+      type: Sequelize.STRING,
+      allowNull:true
   },
     CVV:{
-      primaryKey:true,
-      type: DataTypes.STRING,
-      allowNull:true,
-      autoIncrement:false
+      type: Sequelize.STRING,
+      allowNull:true
   },
     parcelas:{
-      primaryKey:true,
-      type: DataTypes.STRING,
-      allowNull:true,
-      autoIncrement:false
+      type: Sequelize.STRING,
+      allowNull:true
   },
     clientId: {
       allowNull: false,
