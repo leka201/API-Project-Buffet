@@ -14,18 +14,18 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING, 
       },
-      price: {
-        allowNull: false,
-        type: Sequelize.FLOAT
+      decorations: {
+        allowNull: true,
+        type: Sequelize.STRING
       },
-      color: {
-        allowNull: false,
+      items: {
+        allowNull: true,
         type: Sequelize.STRING,
       },
-      dimenson: { 
+      food: { 
         allowNull: true,
         type: Sequelize.STRING, 
       },

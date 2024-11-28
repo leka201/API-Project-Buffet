@@ -6,9 +6,9 @@ class Item extends Model {}
 Item.init(
   {
     name: DataTypes.STRING, 
-    price: DataTypes.FLOAT,
-    color: DataTypes.STRING,
-    dimenson: DataTypes.STRING 
+    decorations: DataTypes.STRING,
+    items: DataTypes.STRING,
+    food: DataTypes.STRING 
   },
   { sequelize, modelName: 'Item', timestamps: true,}
 );

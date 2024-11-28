@@ -7,7 +7,7 @@ const { Op } = require('sequelize');
     /*await check('name').isLength({min: 13, max: 30}).withMessage("não é um tipo de nome para um objeto para festas").run(req)
     await check('decorations').isLength({min: 13, max: 30}).withMessage("não é um tipo de decoração").run(req)
     await check('items').isLength({min: 16, max: 25}).withMessage("não é um tipo de item para festa").run(req)
-    await check('    food').isLength({min: 13, max: 20}).withMessage("não é um tipo de     food").run(req)
+    await check('food').isLength({min: 13, max: 20}).withMessage("não é um tipo de     food").run(req)
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -26,12 +26,12 @@ const { Op } = require('sequelize');
     return res.status(200).json({ message: 'Sucesso', party: party});   
 }
 
-   async function read_party(req, res) {
+async function read_party(req, res) {
     const{name} = req.query
 
     const condition = {};
 
-    if(!name) {
+    if(name) {
         condition.name = { [Op.like]: `%${name}%`}
     }
 

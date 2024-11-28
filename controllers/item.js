@@ -2,13 +2,13 @@ const Item = require("../models/item");
 const { Op } = require('sequelize');
 
 async function create_item(req, res) {
-    const { name, price, color, dimension } = req.body;
+    const { name, decorations, items, food } = req.body;
 
-    if (price === undefined || price < 0.00) {
+    if (decorations === undefined || decorations < 0.00) {
         return res.status(400).json({ message: 'Preço negativo ou não fornecido', itens: null });
     }
 
-    const item = await Item.create({ name, price, color, dimension });
+    const item = await Item.create({ name, decorations, items, food });
     
     return res.status(201).json({ message: 'Sucesso', itens: item });
 }
@@ -29,11 +29,11 @@ async function show_item(req, res) {
 }
 
 async function read_item(req, res) {
-    const { color } = req.query;
+    const { item } = req.query;
 
     const condition = {};
-    if (color) {
-        condition.color = { [Op.like]: `%${color}%` };
+    if (item) {
+        condition.items = { [Op.like]: `%${items}%` };
     }
 
     const items = await Item.findAll({
@@ -45,21 +45,21 @@ async function read_item(req, res) {
 
 async function up_id(req, res) {
     const id = parseInt(req.params.id);
-    const { name, price, color, dimension } = req.body;
+    const { name, decorations, items, food } = req.body;
 
     const item = await Item.findByPk(id);
     if (!item) {
         return res.status(404).json({ message: "Não achei" });
     }
     
-    if (price !== undefined && price < 0.00) {
+    if (decorations !== undefined && decorations < 0.00) {
         return res.status(400).json({ message: "Preço não pode ser negativo" });
     }
 
     if (name) item.name = name;
-    if (price !== undefined) item.price = price;
-    if (color) item.color = color;
-    if (dimension) item.dimension = dimension;
+    if (decorations !== undefined) item.decorations = decorations;
+    if (items) item.items = items;
+    if (food) item.food = food;
 
     await item.save();
     return res.status(200).json({ message: "Atualizado com sucesso", item });

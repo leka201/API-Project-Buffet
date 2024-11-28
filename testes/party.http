@@ -17,7 +17,7 @@ PUT http://localhost:3001/party/update/2 HTTP/1.1
 Content-Type: application/json
 
 {
- "name": "Decoração de Casamento com Flores",
+ "name": "Decoração de Casamento",
  "decorations": "Cesta de Futebol",
  "items": "Cadeira Infantil",
  "food": "Suco dx Frutas"
