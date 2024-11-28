@@ -56,7 +56,7 @@ const { Op } = require('sequelize');
             return res.status(404).json({message: "Não encontrado"});
         }
 
-        await party.update({ name, decorations, items,     food});
+        await party.update({ name, decorations, items, food});
 
         res.status(200).json(party);
     } catch(error){
