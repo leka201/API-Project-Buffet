@@ -8,7 +8,8 @@ Item.init(
     name: DataTypes.STRING, 
     decorations: DataTypes.STRING,
     items: DataTypes.STRING,
-    food: DataTypes.STRING 
+    food: DataTypes.STRING, 
+    imagem: DataTypes.STRING
   },
   { sequelize, modelName: 'Item', timestamps: true,}
 );

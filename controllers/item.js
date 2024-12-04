@@ -2,13 +2,13 @@ const Item = require("../models/item");
 const { Op } = require('sequelize');
 
 async function create_item(req, res) {
-    const { name, decorations, items, food } = req.body;
+    const { name, decorations, items, food, imagem } = req.body;
 
     if (decorations === undefined || decorations < 0.00) {
         return res.status(400).json({ message: 'Preço negativo ou não fornecido', itens: null });
     }
 
-    const item = await Item.create({ name, decorations, items, food });
+    const item = await Item.create({ name, decorations, items, food, imagem });
     
     return res.status(201).json({ message: 'Sucesso', itens: item });
 }
@@ -45,7 +45,7 @@ async function read_item(req, res) {
 
 async function up_id(req, res) {
     const id = parseInt(req.params.id);
-    const { name, decorations, items, food } = req.body;
+    const { name, decorations, items, food, imagem } = req.body;
 
     const item = await Item.findByPk(id);
     if (!item) {
