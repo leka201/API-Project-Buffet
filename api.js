@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3001
 const cors = require('cors')
 app.use(express.json())
 
@@ -26,6 +26,15 @@ app.use("/item", item)
 const ruser = require ('./routes/user')
 app.use('/user', ruser)
 
-app.listen(3001, () => {
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Run: http://localhost::${port}`);
+    });
+}
+
+module.exports = app;
+
+/*app.listen(3001, () => {
     console.log(`Run: http://localhost:${3001}`);
 })
+*/
