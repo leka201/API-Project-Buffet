@@ -26,6 +26,14 @@ app.use("/item", item)
 const ruser = require ('./routes/user')
 app.use('/user', ruser)
 
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Run: http://localhost::$(3001)`);
+    });
+}
+
+module.exports = app;
+
 app.listen(3001, () => {
     console.log(`Run: http://localhost:${3001}`);
 })
