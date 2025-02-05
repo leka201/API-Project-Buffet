@@ -4,7 +4,7 @@ const port = 3001
 const cors = require('cors')
 app.use(express.json())
 
-app.use(cors({origin: 'http://localhost:3000'}))
+app.use(cors({origin: '*'}))
 
 const sequelize = require('./config/database')
 

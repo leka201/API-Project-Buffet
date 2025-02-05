@@ -34,7 +34,7 @@ async function create_users(req,res) {
         })
     }
 
-    if (!(gender === 'mulher' || gender === 'homem' || gender === 'outro')) {
+    if (!(gender === 'masculino' || gender === 'feminino' || gender === 'outro')) {
         return res.status(400).json({
             message: 'Desculpa, mas escolha um dos três: mulher, homem, outro'
         });
