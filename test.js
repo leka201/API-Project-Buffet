@@ -49,7 +49,7 @@ describe('Testes CRUD para API de Usuários', () => {
     });
 
     it('Deve retornar um JSON com status 200', async () => {
-        const response = await request(api).post('/cart/create').send({
+        const response = await request(app).post('/cart/create').send({
             "items": [
                 {
                     "item_id":itemid,
@@ -63,5 +63,41 @@ describe('Testes CRUD para API de Usuários', () => {
     });
         
 });
+
+
+
+it('Deve buscar um carrinho', async () => {
+    const res = await request(app)
+        .get('/cart/show/2')
+        .set('Authorization', `Bearer`).send({
+             
+            "items": [
+                {
+                    "item_id":2,
+                    "qtd":2
+                }
+            ],
+            "clientId": 5
+
+
+        });
+
+    expect(res.status).toBe(202);
+    expect(Array.isArray(res.body)).toBe;
+});
+
+//it('Deve atualizar um carrinho', async () => {
+   // const res = await request(app)
+     //   .put(`/cart/show/2/ `)
+       // .set('Authorization', `Bearer `)
+        //.send({
+          //  nome: 'Carrinho Atualizado'
+        //});
+
+    //expect(res.status).toBe(203) (item_id);
+    //expect(res.body).toHaveProperty('nome', 'Carrinho Atualizado');
+//});
+
+
 
 //npx jest 

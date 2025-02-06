@@ -22,11 +22,11 @@ GET http://localhost:3001/cart/read HTTP/1.1
 Content-Type: application/json
  
 ###
-GET http://localhost:3001/cart/show/8 HTTP/1.1
+GET http://localhost:3001/cart/show/2 HTTP/1.1
 Content-Type: application/json
  
 ###
-PUT http://localhost:3001/cart/update/1 HTTP/1.1
+PUT http://localhost:3001/cart/update/2 HTTP/1.1
 Content-Type: application/json
  
 {
