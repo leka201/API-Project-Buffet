@@ -24,7 +24,7 @@ describe('Testes CRUD para API de Usuários', () => {
         userId = res.body.user.id;
     });
 
-    
+
 
     it('Deve criar um item', async () => {
         const res = await request(app)
@@ -49,7 +49,7 @@ describe('Testes CRUD para API de Usuários', () => {
     });
 
     it('Deve retornar um JSON com status 200', async () => {
-        const response = await request(api).post('/cart/create').send({
+        const response = await request(app).post('/cart/create').send({
             "items": [
                 {
                     "item_id":itemid,
