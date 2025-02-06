@@ -6,6 +6,7 @@ const app = require('./api');
 describe('Testes CRUD para API de Usuários', () => {
     let itemid;
     let userId;
+    let cartid;
    
     it('Deve criar um usuário', async () => {
         const res = await request(app)
@@ -46,7 +47,7 @@ describe('Testes CRUD para API de Usuários', () => {
         const response = await request(app).get('/cart/read');
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty('message');
-    });
+    })
 
     it('Deve retornar um JSON com status 200', async () => {
         const response = await request(app).post('/cart/create').send({
@@ -60,8 +61,22 @@ describe('Testes CRUD para API de Usuários', () => {
         })
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty('cart_created');  
+        cartid = response.body.cart_created.id;
     });
-        
-});
 
-//npx jest 
+    it('deve criar uma festa', async () => {
+        const res = await request(app)
+            .post('/party/create')
+            .send({
+                name: "Decoração de Futebol",
+                decorations: "Cesta de Futebol",
+                id_cart: cartid,
+                food: "Suco de Frutas"
+            });
+        expect(res.status).toBe(201);
+        expect(res.body).toHaveProperty('id');
+    });
+
+        
+
+});

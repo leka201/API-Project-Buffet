@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {   "name": "Decoração de Futebol",
     "decorations": "Cesta de Futebol",
-    "items": "Cadeira Infantil",
+    "items": "Cadeira Infantil", //trocar para id do carrinho
     "food": "Suco de Frutas"
 }
 
