@@ -93,3 +93,26 @@ it('Deve atualizar um usuário', async () => {
     expect(res.body).toHaveProperty();
 });
 //npx jest 
+
+    it('deve criar uma festa', async () => {
+        const res = await request(app)
+            .post('/party/create')
+            .send({
+                name: "Decoração de Futebol",
+                decorations: "Cesta de Futebol",
+                id_cart: cartid,
+                food: "Suco de Frutas"
+            });
+        expect(res.status).toBe(201);
+        expect(res.body).toHaveProperty('id');
+    });
+
+    it('ler as festa pelo id do usuário', async () => {
+        const res = await request(app)
+            .get('/party/read')
+          
+    })
+
+        
+
+});
