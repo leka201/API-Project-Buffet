@@ -1,48 +1,29 @@
 //npm install --save-dev jest supertest
 
 const request = require('supertest');
-const app = require('./api.js'); // Importa a aplicação
-
-describe('Testando a API', () => {
-    it('Deve retornar um JSON com status 200', async () => {
-        const response = await request(app).get('/cart/read');
-        expect(response.status).toBe(200);
-        expect(response.body).toHaveProperty('message');
-    });
-
-    it('Deve retornar um JSON com status 200', async () => {
-        const response = await request(api).post('/cart/create').send({
-    
-                "items": [
-                    {
-                        "item_id":1,
-                        "qtd":2
-                    },
-                    {
-                        "item_id":7,
-                        "qtd":100
-                    }
-                ],
-                "clientId": 5
-    
-            })
-            ;
-        });
-        expect(response.status).toBe(200);
-        expect(response.body).toHaveProperty('cart_created')
-
-
-     
-
-
-});
-
-const request = require('supertest');
-const app = require('./api'); // Ajuste o caminho conforme sua estrutura
-
+const app = require('./api'); 
 
 describe('Testes CRUD para API de Usuários', () => {
-    let items;
+    let itemid;
+    let userId;
+   
+    it('Deve criar um usuário', async () => {
+        const res = await request(app)
+            .post('/user/create')
+            .send({
+                login: 'Vitor Amaro 3',
+                email: 'jorge@gmail.com',
+                password: '28062006',
+                cep: '135732149',
+                born:'2000-01-03',
+                gender:'masculino'
+            });
+
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty('user');
+        userId = res.body.user.id;
+    });
+
     
 
     it('Deve criar um item', async () => {
@@ -58,7 +39,29 @@ describe('Testes CRUD para API de Usuários', () => {
 
         expect(res.status).toBe(201);
         expect(res.body).toHaveProperty('itens');
-        userId = res.body.id;
+        itemid = res.body.itens.id;
     });
-})
+
+    it('Deve retornar um JSON com status 200', async () => {
+        const response = await request(app).get('/cart/read');
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty('message');
+    });
+
+    it('Deve retornar um JSON com status 200', async () => {
+        const response = await request(api).post('/cart/create').send({
+            "items": [
+                {
+                    "item_id":itemid,
+                    "qtd":2
+                }
+            ],
+            "clientId": userId
+        })
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty('cart_created');  
+    });
+        
+});
+
 //npx jest 

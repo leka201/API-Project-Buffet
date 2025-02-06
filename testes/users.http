@@ -8,7 +8,7 @@ Content-Type: application/json
     "email": "jorge@gmail.com",
     "cep": "135732149",
     "born": "2000-01-03",
-    "gender": "homem"
+    "gender": "masculino"
 }
 
 ###
