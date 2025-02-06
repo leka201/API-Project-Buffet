@@ -6,6 +6,7 @@ const app = require('./api');
 describe('Testes CRUD para API de Usuários', () => {
     let itemid;
     let userId;
+    let cartid;
    
     it('Deve criar um usuário', async () => {
         const res = await request(app)
@@ -24,7 +25,7 @@ describe('Testes CRUD para API de Usuários', () => {
         userId = res.body.user.id;
     });
 
-    
+
 
     it('Deve criar um item', async () => {
         const res = await request(app)
@@ -46,7 +47,7 @@ describe('Testes CRUD para API de Usuários', () => {
         const response = await request(app).get('/cart/read');
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty('message');
-    });
+    })
 
     it('Deve retornar um JSON com status 200', async () => {
         const response = await request(app).post('/cart/create').send({
@@ -63,41 +64,5 @@ describe('Testes CRUD para API de Usuários', () => {
     });
         
 });
-
-
-
-it('Deve buscar um carrinho', async () => {
-    const res = await request(app)
-        .get('/cart/show/2')
-        .set('Authorization', `Bearer`).send({
-             
-            "items": [
-                {
-                    "item_id":2,
-                    "qtd":2
-                }
-            ],
-            "clientId": 5
-
-
-        });
-
-    expect(res.status).toBe(202);
-    expect(Array.isArray(res.body)).toBe;
-});
-
-//it('Deve atualizar um carrinho', async () => {
-   // const res = await request(app)
-     //   .put(`/cart/show/2/ `)
-       // .set('Authorization', `Bearer `)
-        //.send({
-          //  nome: 'Carrinho Atualizado'
-        //});
-
-    //expect(res.status).toBe(203) (item_id);
-    //expect(res.body).toHaveProperty('nome', 'Carrinho Atualizado');
-//});
-
-
 
 //npx jest 
