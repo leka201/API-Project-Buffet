@@ -36,7 +36,7 @@ describe('Testando a API', () => {
 
 
 });
-*/
+
 const request = require('supertest');
 const app = require('./api'); // Ajuste o caminho conforme sua estrutura
 
