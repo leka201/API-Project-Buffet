@@ -65,4 +65,31 @@ describe('Testes CRUD para API de Usuários', () => {
         
 });
 
+it('Deve buscar 1 item', async () => {
+    const res = await request(app)
+        .get('/item/show/1')
+
+    expect(res.status).toBe(200);
+    expect(Array.isArray(res.body)).toBe;
+});
+
+it('Deve buscar todos os item', async () => {
+    const res = await request(app)
+        .get('/item/read/')
+
+    expect(res.status).toBe(200);
+    expect(Array.isArray(res.body)).toBe;
+});
+
+it('Deve atualizar um usuário', async () => {
+    const res = await request(app)
+        .put(`/item/upd/${userId}`)
+        .send({
+            nome: 'Teste User Atualizado'
+        });
+
+    expect(res.status).toBe(200);
+    console.log(res)
+    expect(res.body).toHaveProperty();
+});
 //npx jest 
