@@ -15,27 +15,71 @@ Party.init({
         }
     },
 
-    decorations: {
+    cart_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+
+    tipo_pag: {                          
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: [16, 30]
+            len: [3, 6]
         }
     },
-    items: {
+
+    cpf_cnpj: {
         type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            len: [11,14]
+        }
+    },
+
+    nome_cartao: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            len: [13,30]
+        }
+    },
+
+    numero_cartao: {
+        type: DataTypes.STRING,
+        allowNull:true,
+        validate: {
+            len: [16,16]
+        }
+    },
+    validate: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        validate: {
+            len: [10,10] 
+        }
+    },
+
+    CVV: {
+        type: DataTypes.NUMBER,
+        allowNull:true,
+        validate: {
+            len: [3,3]
+        }
+    },
+
+    valor: {
+        type: DataTypes.DECIMAL,
         allowNull: false,
         validate: {
-            len: [16, 25]
+            len: [1000]
         }
     },
-    food: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            len: [13, 20]
-        }
-    },
+
 }, {
     sequelize,
     modelName:'Party',

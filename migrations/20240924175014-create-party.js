@@ -1,3 +1,5 @@
+const sequelize = require('../config/database');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -12,18 +14,26 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      decorations: {
+      cart_id: {
+        allowNull: false,
+        primaryKey: false,
+        type: Sequelize.INTEGER,
+      },
+      user_id: {
+        allowNull: false,
+        primaryKey: false,
+        type: Sequelize.INTEGER,
+      },
+      tipo_pag: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      items: {
-        allowNull: false,
-        type: Sequelize.STRING,
+
+      cpf_cnpj: {
+        allowNull: true,
+        type: sequelize.STRING,
       },
-      food: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
+
       createdAt: {  
         allowNull: false,
         type: Sequelize.DATE,
