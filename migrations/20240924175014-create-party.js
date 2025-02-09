@@ -34,6 +34,31 @@ module.exports = {
         type: sequelize.STRING,
       },
 
+      nome_cartao: {
+        allowNull: true,
+        type: sequelize.STRING
+      },
+
+      numero_cartao: {
+        allowNull: true,
+        type: sequelize.NUMBER
+      },
+
+      validade: {
+        allowNull: true,
+        type: sequelize.DATE
+      },
+
+      CVV: {
+        allowNull: true,
+        type: sequelize.NUMBER
+      },
+
+      valor: {
+        allowNull: true,
+        type: sequelize.NUMBER
+      },
+
       createdAt: {  
         allowNull: false,
         type: Sequelize.DATE,
