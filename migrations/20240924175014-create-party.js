@@ -31,32 +31,32 @@ module.exports = {
 
       cpf_cnpj: {
         allowNull: true,
-        type: sequelize.STRING,
+        type: Sequelize.STRING,
       },
 
       nome_cartao: {
         allowNull: true,
-        type: sequelize.STRING
+        type: Sequelize.STRING
       },
 
       numero_cartao: {
         allowNull: true,
-        type: sequelize.NUMBER
+        type: Sequelize.STRING
       },
 
       validade: {
         allowNull: true,
-        type: sequelize.DATE
+        type: Sequelize.STRING
       },
 
       CVV: {
         allowNull: true,
-        type: sequelize.NUMBER
+        type: Sequelize.STRING
       },
 
       valor: {
         allowNull: true,
-        type: sequelize.NUMBER
+        type: Sequelize.STRING
       },
 
       createdAt: {  
