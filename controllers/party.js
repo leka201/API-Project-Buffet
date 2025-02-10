@@ -16,12 +16,12 @@ const { Op } = require('sequelize');
 
     console.log(req.body);
     const {name, cart_id, user_id, tipo_pag, cpf_cnpj, nome_cartao, numero_cartao, validade, CVV, valor} = req.body
-    if( !name|| !cart_id || !user_id || !tipo_pag ||!cpf_cnpj || !nome_cartao || !numero_cartao || !validade || !CVV || !valor){
+    if( !name|| !cart_id || !user_id || !tipo_pag ||!valor){
 
         return res.status(400).json({ message: 'todos os campos são obrigatórios'}); //usar de acordo com a tabela de status http
     }
 
-    const party = await Party.create({name, cart_id, user_id, tipo_pag, cpf_cnpj, nome_cartao, numero_cartao, validade, CVV, valor})  // especifica um objeto e o coloca dentro de uma variavel 
+    const party = await Party.create({name, cart_id, user_id, tipo_pag, valor})  // especifica um objeto e o coloca dentro de uma variavel 
      
     return res.status(200).json({ message: 'Sucesso', party: party});   
 }
@@ -48,7 +48,7 @@ async function read_party(req, res) {
 
     try{
         const{id}= req.params;
-        const{name, cart_id, user_id, tipo_pag, cpf_cnpj, nome_cartao, numero_cartao, validade, CVV, valor } = req.body;
+        const{name, cart_id, user_id, tipo_pag, valor } = req.body;
 
         const party = await Party.findByPk(id);
 
@@ -56,7 +56,7 @@ async function read_party(req, res) {
             return res.status(404).json({message: "Não encontrado"});
         }
 
-        await party.update({ name, cart_id, user_id, tipo_pag, cpf_cnpj, nome_cartao, numero_cartao, validade, CVV, valor});
+        await party.update({ name, cart_id, user_id, tipo_pag, valor});
 
         res.status(200).json(party);
     } catch(error){

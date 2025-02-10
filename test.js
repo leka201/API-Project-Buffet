@@ -92,27 +92,52 @@ it('Deve atualizar um usuário', async () => {
     console.log(res)
     expect(res.body).toHaveProperty();
 });
-//npx jest 
-
     it('deve criar uma festa', async () => {
         const res = await request(app)
             .post('/party/create')
             .send({
-                name: "Decoração de Futebol",
-                decorations: "Cesta de Futebol",
-                id_cart: cartid,
-                food: "Suco de Frutas"
+                name: "Festa Infantil",
+                cart_id: 1,
+                user_id: 1,
+                tipo_pag: "cartao",
+                cpf_cnpj:"999.999.999-99",
+                nome_cartao:"nuu",
+                número_cartao:"9999 9999 9999 9999",
+                validade:"99/99",
+                CVV:"999",
+                valor: 2000
             });
-        expect(res.status).toBe(201);
+        expect(res.status).toBe(200);
         expect(res.body).toHaveProperty('id');
     });
 
-    it('ler as festa pelo id do usuário', async () => {
+    it('pagamento com pix', async ()=> {
         const res = await request(app)
-            .get('/party/read')
-          
-    })
+            .post()
+            .send({})
 
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty('id');
+        token = res.body.token;
+    });
+
+    it('Buscar a Festa criada', async () => {
+        const res = await request(app)
+            .get('')
+        
+        expect(res.status).toBe(200);
+        expect(Array.isArray(res.body)).toBe(true);
+    });
+
+    it('Atualizar Festa', async () => {
+        const res = await request(app)
+            .put('')
+            .set('')
+            .send({})
+        
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty('')
+    });
         
 
-});
+

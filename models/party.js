@@ -11,7 +11,7 @@ Party.init({
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: [13, 30]
+            len: [13, 50]
         }
     },
 
@@ -29,7 +29,7 @@ Party.init({
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: [3, 6]
+            len: [3, 10]
         }
     },
 
@@ -37,7 +37,7 @@ Party.init({
         type: DataTypes.STRING,
         allowNull: true,
         validate: {
-            len: [11,14]
+            len: [11,16]
         }
     },
 
@@ -53,14 +53,14 @@ Party.init({
         type: DataTypes.STRING,
         allowNull:true,
         validate: {
-            len: [16,16]
+            len: [16, 20]
         }
     },
-    validate: {
+    validade: {
         type: DataTypes.DATE,
         allowNull: true,
         validate: {
-            len: [10,10] 
+            len: [10,15] 
         }
     },
 
@@ -76,7 +76,7 @@ Party.init({
         type: DataTypes.DECIMAL,
         allowNull: false,
         validate: {
-            len: [1000]
+            len: [ 1,1000]
         }
     },
 
