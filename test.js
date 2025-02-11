@@ -25,7 +25,48 @@ describe('Testes CRUD para API de Usuários', () => {
         userId = res.body.user.id;
     });
 
+    it('Deve buscar todos os usuários', async () => {
+        const res = await request(app)
+            .get('user/read/')
 
+        expect(res.body).toHaveProperty('db');
+        expect(res.body).toHaveProperty('message', 'Usuarios nao encontrado');
+    });
+
+    it('Deve buscar um usuário pelo ID', async () => {
+        const res = await request(app)
+            .get(`/user/show/${userId}`)
+
+        expect(res.body).toHaveProperty('user');
+        expect(res.body.user).toHaveProperty('email', 'jorge@gmail.com');
+        expect(res.body).toHaveProperty('message', 'Usuario nao encontrado');
+       
+        
+    });
+
+    it('Deve atualizar um usuário', async () => {
+        const res = await request(app)
+            .put(`user/upt/${userId}`)
+            .send({
+                login: "jorge",
+                password: "28062006"
+            });
+        
+        expect(res.body).toHaveProperty('user');
+        expect(res.body.user).toHaveProperty('login', 'jorge');
+        expect(res.body.user).toHaveProperty('password', '28062006');
+        expect(res.body).toHaveProperty('message', 'Usuario nao encontrado');
+        
+
+    });
+
+    it('Deve deletar um usuário', async () => {
+        const res = await request(app)
+         .delete(`user/del/${userId}`)
+        
+         expect(res.body).toHaveProperty('message', 'Usuario deletado com Sucessso');  
+    });
+    
 
     it('Deve criar um item', async () => {
         const res = await request(app)
