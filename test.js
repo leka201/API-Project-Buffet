@@ -27,7 +27,7 @@ describe('Testes CRUD para API de Usuários', () => {
 
     it('Deve buscar todos os usuários', async () => {
         const res = await request(app)
-            .get('user/read/')
+            .get('/user/read/')
 
         expect(res.body).toHaveProperty('db');
         expect(res.body).toHaveProperty('message', 'Usuarios nao encontrado');
@@ -51,6 +51,7 @@ describe('Testes CRUD para API de Usuários', () => {
                 login: "jorge",
                 password: "28062006"
             });
+
         
         expect(res.body).toHaveProperty('user');
         expect(res.body.user).toHaveProperty('login', 'jorge');
