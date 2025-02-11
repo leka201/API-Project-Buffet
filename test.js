@@ -87,7 +87,7 @@ describe('Testes CRUD para API de Usuários', () => {
 
 
 
-    it('Deve retornar um JSON com status 200', async () => {
+    it('Deve busca todos carrinhos', async () => {
         const response = await request(app).get('/cart/read');
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty('message',"item adicionado");
@@ -106,9 +106,168 @@ describe('Testes CRUD para API de Usuários', () => {
             "clientId": userId
         })
         expect(response.status).toBe(200);
-        expect(response.body).toHaveProperty('cart_created');  
+        expect(response.body).toHaveProperty('cart_created');
+        expect(response.body).toHaveProperty('message',"Carrinho criado");  
+        cartid = response.body.cart_created.id;
     });
-        
-});
 
-//npx jest 
+
+        
+   
+    it('deve buscar um carrinho pelo id', async () => {
+        const response = await request(app)
+            .get(`/cart/show/${cartid}`)
+        
+        expect(app.response.status).toBe(201);
+        expect(response.body).toHaveProperty('cart_created')
+        expect(response.body).toHaveProperty('message',"Encontrado");
+        
+    });
+
+
+
+    it('Deve atualizar um carrinho', async () => {
+        const response = await request(app)
+            .put(`/cart/update/${cartid}`)
+            .send({
+                "items": [
+                    {
+                        "item_id": itemid,
+                        "qtd": 5
+                    }
+                ]
+            });
+
+        expect(response.status).toBe(203);
+        expect(response.body).toHaveProperty('cart_created')
+        expect(response.body).toHaveProperty('message',"sucesso");
+    });
+
+
+
+    it('Deve deletar um carrinho ', async () => {
+        const response = await request(app)
+            .delete(`/cart/delete/${cartid}`) 
+        expect(response.status).toBe(201);
+        expect(response.body.message).toHaveProperty("deletado com sucesso!");
+    });
+
+
+    it('Deve buscar 1 item', async () => {
+        console.log("Buscando o item: "+itemid)
+
+        const res = await request(app)
+            .get(`/item/show/${itemid}`) 
+
+        expect(res.status).toBe(200);
+        expect(Array.isArray(res.body)).toBe;
+    });
+
+    it('Deve buscar todos os item', async () => {
+        const res = await request(app)
+            .get('/item/read/')
+
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty('Sucesso')
+    });
+       
+    it('Deve atualizar um item', async () => {
+        const res = await request(app)
+            .put(`/item/upd/${itemid}`)
+            .send({
+                nome: 'Teste User Atualizado'
+            });
+
+  
+        expect(res.status).toBe(200);
+        console.log(res)
+        expect(res.body).toHaveProperty('item');
+    });
+
+    let idpary
+    it('deve criar uma festa', async () => {
+        const res = await request(app)
+            .post('/party/create')
+            .send({
+                name: "Festa Infantil",
+                cart_id: cartid,
+                user_id: userId,
+                tipo_pag: "cartao",
+                cpf_cnpj:"999.999.999-99",
+                nome_cartao:"nuu",
+                número_cartao:"9999 9999 9999 9999",
+                validade:"99/99",
+                CVV:"999",
+                valor: 2000
+            });
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty('message','Sucesso');
+        expect(res.body).toHaveProperty('party');
+        idpary = res.body.party.id
+    });
+
+    it('pagamento com pix', async ()=> {
+        const res = await request(app)
+            .post('/party/create')
+            .send({
+                name: "Festa Infantil",
+                cart_id: cartid,
+                user_id: userId,
+                tipo_pag: "pix",
+                valor: 2000
+            })
+
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty('message','Sucesso');
+        expect(res.body).toHaveProperty('party');
+    });
+
+    it('Buscar todas as Festas criadas', async () => {
+        const res = await request(app)
+            .get('/party/read/')
+        
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty('message','Sucesso');
+        expect(res.body).toHaveProperty('db');
+    });
+
+    it('Atualizar Festa', async () => {
+        const res = await request(app)
+            .put(`/party/update/${idpary}`)
+            .send({
+                name: "Festa Infantil",
+                cart_id: cartid,
+                user_id: userId,
+                pix: "pix",
+                cpf_cnpj:"",
+                nome_do_cartao:"",
+                numero_do_cartao:"",
+                validade:"",
+                CVV:""
+            });
+        
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty('message','Festa Atualizada com sucesso');
+    });
+
+
+    it('Deletar Festa', async () => {
+        const res = await request(app)
+            .delete(`/party/del/${idpary}`)
+        
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty('message','Foi de base');
+    })
+        
+
+    it('Deve deletar um Item', async () => {
+        const res = await request(app)
+            .delete(`/item/del/${itemid}`) 
+            
+
+        expect(res.status).toBe(203); 
+    });    
+
+});  
+       
+//npm test
