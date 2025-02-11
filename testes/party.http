@@ -1,11 +1,30 @@
+### exemplo de create de festa com cartão e exemplo de create de festa com pix
+POST http://localhost:3001/party/create HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Festa Infantil",
+    "cart_id": 1,
+    "user_id": 1,
+    "tipo_pag": "cartao",
+    "cpf_cnpj":"999.999.999-99",
+    "nome_cartao":"nuu",
+    "número_cartao":"9999 9999 9999 9999",
+    "validade":"99/99",
+    "CVV":"999",
+    "valor": 2000
+}
+
 ### type create - protocolo http - endereço:porta - rota do objeto
 POST http://localhost:3001/party/create HTTP/1.1
 Content-Type: application/json
 
-{   "name": "Decoração de Futebol",
-    "decorations": "Cesta de Futebol",
-    "items": "Cadeira Infantil", //trocar para id do carrinho
-    "food": "Suco de Frutas"
+{
+    "name": "Festa Infantil",
+    "cart_id": 1,
+    "user_id": 1,
+    "tipo_pag": "pix",
+    "valor": 2000
 }
 
 ###
@@ -13,18 +32,23 @@ GET http://localhost:3001/party/read HTTP/1.1
 Content-Type: application/json
 
 ###
-PUT http://localhost:3001/party/update/2 HTTP/1.1
+PUT http://localhost:3001/party/update/18 HTTP/1.1
 Content-Type: application/json
 
 {
- "name": "Decoração de Casamento",
- "decorations": "Cesta de Futebol",
- "items": "Cadeira Infantil",
- "food": "Suco dx Frutas"
+    "name": "Festa Infantil",
+    "cart_id": 1,
+    "user_id": 1,
+    "pix": "pix",
+    "cpf/cnpj":"",
+    "nome do cartão":"",
+    "número do cartão":"",
+    "validade":"",
+    "(CVV)":""
 }
 
 ###
-DELETE http://localhost:3001/party/del/1 HTTP/1.1
+DELETE http://localhost:3001/party/del/18 HTTP/1.1
 Content-Type: application/json
 
 

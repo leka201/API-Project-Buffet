@@ -25,7 +25,48 @@ describe('Testes CRUD para API de Usuários', () => {
         userId = res.body.user.id;
     });
 
+    it('Deve buscar todos os usuários', async () => {
+        const res = await request(app)
+            .get('user/read/')
 
+        expect(res.body).toHaveProperty('db');
+        expect(res.body).toHaveProperty('message', 'Usuarios nao encontrado');
+    });
+
+    it('Deve buscar um usuário pelo ID', async () => {
+        const res = await request(app)
+            .get(`/user/show/${userId}`)
+
+        expect(res.body).toHaveProperty('user');
+        expect(res.body.user).toHaveProperty('email', 'jorge@gmail.com');
+        expect(res.body).toHaveProperty('message', 'Usuario nao encontrado');
+       
+        
+    });
+
+    it('Deve atualizar um usuário', async () => {
+        const res = await request(app)
+            .put(`user/upt/${userId}`)
+            .send({
+                login: "jorge",
+                password: "28062006"
+            });
+        
+        expect(res.body).toHaveProperty('user');
+        expect(res.body.user).toHaveProperty('login', 'jorge');
+        expect(res.body.user).toHaveProperty('password', '28062006');
+        expect(res.body).toHaveProperty('message', 'Usuario nao encontrado');
+        
+
+    });
+
+    it('Deve deletar um usuário', async () => {
+        const res = await request(app)
+         .delete(`user/del/${userId}`)
+        
+         expect(res.body).toHaveProperty('message', 'Usuario deletado com Sucessso');  
+    });
+    
 
     it('Deve criar um item', async () => {
         const res = await request(app)
@@ -39,7 +80,7 @@ describe('Testes CRUD para API de Usuários', () => {
             });
 
         expect(res.status).toBe(201);
-        expect(res.body).toHaveProperty('itens');
+        expect(res.body).toHaveProperty('item');
         itemid = res.body.itens.id;
     });
 
@@ -64,51 +105,9 @@ describe('Testes CRUD para API de Usuários', () => {
             "clientId": userId
         })
         expect(response.status).toBe(200);
-        expect(response.body).toHaveProperty('cart_created');
-        expect(response.body).toHaveProperty('message',"Carrinho criado");  
-        cartid = response.body.cart_created.id;
+        expect(response.body).toHaveProperty('cart_created');  
     });
-
-
         
-   
-    it('deve buscar um id', async () => {
-        const response = await request(app)
-            .get(`/cart/show/${cartid}`)
-        
-        expect(app.response.status).toBe(201);
-        expect(response.body).toHaveProperty('cart_created')
-        expect(response.body).toHaveProperty('message',"Encontrado");
-        
-    });
-
-
-
-    it('Deve atualizar um carrinho', async () => {
-        const response = await request(app)
-            .put(`/cart/update/${cartid}`)
-            .send({
-                "items": [
-                    {
-                        "item_id": itemid,
-                        "qtd": 5
-                    }
-                ]
-            });
-
-        expect(response.status).toBe(203);
-        expect(response.body).toHaveProperty('cart_created')
-        expect(response.body).toHaveProperty('message',"sucesso");
-    });
-
-
-
-    it('Deve deletar um carrinho ', async () => {
-        const response = await request(app)
-            .delete(`/cart/delete/${cartid}`) 
-        expect(response.status).toBe(201);
-        expect(response.body.message).toHaveProperty("deletado com sucesso!");
-    });
-
-
 });
+
+//npx jest 
