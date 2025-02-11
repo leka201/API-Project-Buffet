@@ -6,7 +6,7 @@ const app = require('./api');
 describe('Testes CRUD para API de Usuários', () => {
     let itemid;
     let userId;
-    let cartid;
+    
    
     it('Deve criar um usuário', async () => {
         const res = await request(app)
@@ -43,13 +43,17 @@ describe('Testes CRUD para API de Usuários', () => {
         itemid = res.body.itens.id;
     });
 
+
+
     it('Deve retornar um JSON com status 200', async () => {
         const response = await request(app).get('/cart/read');
         expect(response.status).toBe(200);
-        expect(response.body).toHaveProperty('message');
+        expect(response.body).toHaveProperty('message',"item adicionado");
     })
 
-    it('Deve retornar um JSON com status 200', async () => {
+
+    let cartid;
+    it('Deve criar um carrinho', async () => {
         const response = await request(app).post('/cart/create').send({
             "items": [
                 {
@@ -60,9 +64,51 @@ describe('Testes CRUD para API de Usuários', () => {
             "clientId": userId
         })
         expect(response.status).toBe(200);
-        expect(response.body).toHaveProperty('cart_created');  
+        expect(response.body).toHaveProperty('cart_created');
+        expect(response.body).toHaveProperty('message',"Carrinho criado");  
+        cartid = response.body.cart_created.id;
     });
-        
-});
 
-//npx jest 
+
+        
+   
+    it('deve buscar um id', async () => {
+        const response = await request(app)
+            .get(`/cart/show/${cartid}`)
+        
+        expect(app.response.status).toBe(201);
+        expect(response.body).toHaveProperty('cart_created')
+        expect(response.body).toHaveProperty('message',"Encontrado");
+        
+    });
+
+
+
+    it('Deve atualizar um carrinho', async () => {
+        const response = await request(app)
+            .put(`/cart/update/${cartid}`)
+            .send({
+                "items": [
+                    {
+                        "item_id": itemid,
+                        "qtd": 5
+                    }
+                ]
+            });
+
+        expect(response.status).toBe(203);
+        expect(response.body).toHaveProperty('cart_created')
+        expect(response.body).toHaveProperty('message',"sucesso");
+    });
+
+
+
+    it('Deve deletar um carrinho ', async () => {
+        const response = await request(app)
+            .delete(`/cart/delete/${cartid}`) 
+        expect(response.status).toBe(201);
+        expect(response.body.message).toHaveProperty("deletado com sucesso!");
+    });
+
+
+});
