@@ -80,7 +80,7 @@ describe('Testes CRUD para API de Usuários', () => {
             });
 
         expect(res.status).toBe(201);
-        expect(res.body).toHaveProperty('itens');
+        expect(res.body).toHaveProperty('item');
         itemid = res.body.itens.id;
     });
 
@@ -104,35 +104,40 @@ describe('Testes CRUD para API de Usuários', () => {
         expect(response.body).toHaveProperty('cart_created');  
     });
         
-});
 
-it('Deve buscar 1 item', async () => {
-    const res = await request(app)
-        .get('/item/show/1')
 
-    expect(res.status).toBe(200);
-    expect(Array.isArray(res.body)).toBe;
-});
+    it('Deve buscar 1 item', async () => {
+        console.log("Buscando o item: "+itemid)
 
-it('Deve buscar todos os item', async () => {
-    const res = await request(app)
-        .get('/item/read/')
+        const res = await request(app)
+            .get(`/item/show/${itemid}`) 
 
-    expect(res.status).toBe(200);
-    expect(Array.isArray(res.body)).toBe;
-});
+        expect(res.status).toBe(200)
+        expect(res.body).toHaveProperty;('Achei')
+    });
 
-it('Deve atualizar um usuário', async () => {
-    const res = await request(app)
-        .put(`/item/upd/${userId}`)
-        .send({
-            nome: 'Teste User Atualizado'
-        });
+    it('Deve buscar todos os item', async () => {
+        const res = await request(app)
+            .get('/item/read/')
 
-    expect(res.status).toBe(200);
-    console.log(res)
-    expect(res.body).toHaveProperty();
-});
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty('Sucesso')
+    });
+
+    it('Deve atualizar um item', async () => {
+        const res = await request(app)
+            .put(`/item/upd/${itemid}`)
+            .send({
+                nome: 'Teste User Atualizado'
+            });
+
+  
+        expect(res.status).toBe(200);
+        console.log(res)
+        expect(res.body).toHaveProperty('item');
+    });
+    //npx jest 
+
     it('deve criar uma festa', async () => {
         const res = await request(app)
             .post('/party/create')
@@ -179,6 +184,14 @@ it('Deve atualizar um usuário', async () => {
         expect(res.status).toBe(200);
         expect(res.body).toHaveProperty('')
     });
-        
 
 
+    it('Deve deletar um Item', async () => {
+        const res = await request(app)
+            .delete(`/item/del/${itemid}`) 
+            
+
+        expect(res.status).toBe(203); 
+    });    
+
+});  
