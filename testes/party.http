@@ -32,7 +32,7 @@ GET http://localhost:3001/party/read HTTP/1.1
 Content-Type: application/json
 
 ###
-PUT http://localhost:3001/party/update/2 HTTP/1.1
+PUT http://localhost:3001/party/update/18 HTTP/1.1
 Content-Type: application/json
 
 {
@@ -48,7 +48,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3001/party/del/1 HTTP/1.1
+DELETE http://localhost:3001/party/del/18 HTTP/1.1
 Content-Type: application/json
 
 
