@@ -1,133 +1,136 @@
-const { AsyncLocalStorage } = require('async_hooks')
-const User = require('../models/user')
-const {op, where} = require ("sequelize")
+const { AsyncLocalStorage } = require('async_hooks');
+const User = require('../models/user');
+const { op, where } = require('sequelize');
 
+async function create_users(req, res) {
+    const { login, password, cep, email, born, gender } = req.body;
 
-async function create_users(req,res) {
-    const {login, password, cep, email, born, gender} = req.body   
-
-    if(!login || !password ||!email || !cep || !born || !gender){
-        return res.status(408).json({ message: 'Esses seguintes campos nao forma prenchidos: password'})
+    if (!login || !password || !email || !cep || !born || !gender) {
+        return res.status(400).json({ message: 'Campos obrigatórios não preenchidos' });
     }
 
-    if(password.length < 8 ){
-        return res.status(301).json({
-            Message: 'Essa senha tem q possuir 8 ou mais caracteres  '
-        })
+    if (password.length < 8) {
+        return res.status(400).json({ message: 'A senha deve ter pelo menos 8 caracteres' });
     }
-    
-    if(cep.length == 8 ){
-        return res.status(301).json({
-            message: 'Esse campo tem q possuir exatamente 8 carcteres'
-        })
+
+    if (cep.length !== 8) {
+        return res.status(400).json({ message: 'O CEP deve conter exatamente 8 caracteres' });
     }
-    
+
     if (!email.includes('@')) {
-        return res.status(301).json({ 
-            message: 'Obrigatório possuir um @ nesse campo.'
-        });
+        return res.status(400).json({ message: 'O e-mail deve conter um "@"' });
     }
 
-    if(age(born) < 18){
-        return res.status(301).json({
-            message:'sua idade não é maior que 18 anos'
-        })
+    if (age(born) < 18) {
+        return res.status(400).json({ message: 'A idade mínima é 18 anos' });
     }
 
-    if (!(gender === 'masculino' || gender === 'feminino' || gender === 'outro')) {
+    if (!['masculino', 'feminino', 'outro'].includes(gender.toLowerCase())) {
         return res.status(400).json({
-            message: 'Desculpa, mas escolha um dos três: mulher, homem, outro'
+            message: 'Gênero inválido. Escolha entre "masculino", "feminino" ou "outro".'
         });
     }
-    const user = await User.create({login, password,  cep, email,  born, gender })
 
-    return res.status(200).json({
-        message: 'Sucesso meu campeão',user: user
-    })
+    // Verificando se o e-mail já está cadastrado
+    const existingEmail = await User.findOne({ where: { email } });
+    if (existingEmail) {
+        return res.status(400).json({ message: 'O e-mail já está em uso' });
+    }
+
+    // Verificando se o login já está cadastrado
+    const existingLogin = await User.findOne({ where: { login } });
+    if (existingLogin) {
+        return res.status(400).json({ message: 'O nome de usuário já está em uso' });
+    }
+
+    // Criando o novo usuário
+    const user = await User.create({ login, password, cep, email, born, gender });
+
+    return res.status(201).json({
+        message: 'Usuário criado com sucesso',
+        user
+    });
 }
 
 function age(date) {
-    const
-      birthdate = new Date(date),
-      today = new Date();
-  
+    const birthdate = new Date(date);
+    const today = new Date();
+
     let age = today.getFullYear() - birthdate.getFullYear();
-      
+
     if (birthdate.getDate() >= today.getDate() && birthdate.getMonth() >= today.getMonth()) age--;
-  
+
     return age;
-  }
+}
 
+async function show_user(req, res) {
+    const id = parseInt(req.params.id);
 
-async function show_user (req,res) {
-    const id = parseInt(req.params.id)
+    const user = await User.findByPk(id);
 
-    const user = await User.findByPk(id)
-    
-    if(!user){
+    if (!user) {
         return res.status(404).json({
-            message: "não encontrado"
-        })
+            message: "Usuário não encontrado"
+        });
     }
 
-        return res.status(202).json({
-            message: "Encontrei",
-            db:user
-        })
-        
-    }
-
-async function read_users(req, res){
-    const {login} = req.query
-
-    const condition = {}
-    
-    
-    if(login){
-        condition.login = { [op.like]:`%${login}%`} 
-    }
-
-    return res.status(200).json({ 
-        message: 'encontrado ', 
-        db: await User.findAll({
-            where:Object.keys(condition).length > 0?
-            condition:undefined
-        })
-    })
+    return res.status(202).json({
+        message: "Usuário encontrado",
+        db: user
+    });
 }
 
-async function update_user(req, res){
-    const id = parseInt(req.params.id)
+async function read_users(req, res) {
+    const { login } = req.query;
 
-    const {login, pass} = req.body
+    const condition = {};
 
-    
-
-    const user = await User.findByPk(id)
-
-
-    if(!user) {
-        
-        return {status: 404, msg: "nao encontrado"}
+    if (login) {
+        condition.login = { [op.like]: `%${login}%` };
     }
-       
-    if(login) user.login = login
-    if(pass) user.pass = pass
 
-    return {status: 200, msg: user}
+    const users = await User.findAll({
+        where: Object.keys(condition).length > 0 ? condition : undefined
+    });
+
+    return res.status(200).json({
+        message: 'Usuários encontrados',
+        db: users
+    });
 }
 
-async function delete_user(req, res){
-    const id = parseInt(req.params.id)
-   
-    const user = await User.findByPk(id)
-    if(!user) {
-        
-        return false
+async function update_user(req, res) {
+    const id = parseInt(req.params.id);
+    const { login, password } = req.body;
+
+    const user = await User.findByPk(id);
+
+    if (!user) {
+        return res.status(404).json({ message: "Usuário não encontrado" });
     }
-    await user.destroy()
-    return true
+
+    if (login) user.login = login;
+    if (password) user.password = password;
+
+    // Salvar no banco de dados
+    await user.save();
+
+    return res.status(200).json({ message: "Usuário atualizado com sucesso", user });
 }
 
+async function delete_user(req, res) {
+    const id = parseInt(req.params.id);
 
-module.exports = {create_users, update_user, delete_user, read_users, show_user }
+    const user = await User.findByPk(id);
+
+    if (!user) {
+        return res.status(404).json({ message: "Usuário não encontrado" });
+    }
+
+    // Deletar o usuário
+    await user.destroy();
+
+    return res.status(200).json({ message: "Usuário deletado com sucesso" });
+}
+
+module.exports = { create_users, update_user, delete_user, read_users, show_user };
