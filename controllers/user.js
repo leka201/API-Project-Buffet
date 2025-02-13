@@ -48,7 +48,7 @@ async function create_users(req, res) {
 
     return res.status(201).json({
         message: 'Usuário criado com sucesso',
-        user
+        user: user
     });
 }
 
@@ -76,7 +76,7 @@ async function show_user(req, res) {
 
     return res.status(202).json({
         message: "Usuário encontrado",
-        db: user
+        user: user
     });
 }
 
@@ -95,7 +95,7 @@ async function read_users(req, res) {
 
     return res.status(200).json({
         message: 'Usuários encontrados',
-        db: users
+        users: users
     });
 }
 
@@ -115,7 +115,7 @@ async function update_user(req, res) {
     // Salvar no banco de dados
     await user.save();
 
-    return res.status(200).json({ message: "Usuário atualizado com sucesso", user });
+    return res.status(200).json({ message: "Usuário atualizado com sucesso", user: user });
 }
 
 async function delete_user(req, res) {

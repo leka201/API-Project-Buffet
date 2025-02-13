@@ -23,7 +23,7 @@ async function create_cart( req, res){
     const cart = await Cart.create({clientId,tipo_pagamento,cpf,nome_proprietario,numero_do_cartao,validade,cvv,parcelas})
 
     return res.status(200).json({
-        message: 'Carrinho criado', cart_created: cart
+        message: 'Carrinho criado', db: cart
     })
 }
 
@@ -38,7 +38,7 @@ async function  show_cart(req, res){
         })
     }
 
-    return res.status(202).json({
+    return res.status(201).json({
         message: "Encontrado",
         db: cart
     })
@@ -56,7 +56,7 @@ async function read_cart(req,res){
     }
 
     return res.status(200).json({ 
-        message: 'item adicionado ', db:await Cart.findAll({
+        message: 'carrinhos encontrados', db:await Cart.findAll({
             where:Object.keys(condition).length > 0?
             condition:undefined
         })
@@ -83,7 +83,7 @@ async function up_id(req, res){
 
     return res.status(203).json({
         message: 'Sucesso',
-        carrinho_encontrado: cart
+        db: cart
     })
 }
 
@@ -96,7 +96,7 @@ async function delete_cart(req, res){
     }
 
     await cart.destroy()
-    return res.status(201).json("deletado com sucesso!")
+    return res.status(203).json({ message: "Deletado" }); 
 }
 
 module.exports = {

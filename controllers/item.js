@@ -10,7 +10,7 @@ async function create_item(req, res) {
 
     const item = await Item.create({ name, decorations, items, food, imagem });
     
-    return res.status(201).json({ message: 'Sucesso', itens: item });
+    return res.status(201).json({ message: 'Sucesso', item: item });
 }
 
 async function show_item(req, res) {
@@ -24,7 +24,7 @@ async function show_item(req, res) {
     
     return res.status(200).json({
         message: "Achei",
-        db: item
+        item: item
     });
 }
 
@@ -40,7 +40,7 @@ async function read_item(req, res) {
         where: Object.keys(condition).length > 0 ? condition : undefined
     });
 
-    return res.status(200).json({ message: 'Sucesso', db: items });
+    return res.status(200).json({ message: 'Sucesso', itens: items });
 }
 
 async function up_id(req, res) {
@@ -62,7 +62,7 @@ async function up_id(req, res) {
     if (food) item.food = food;
 
     await item.save();
-    return res.status(200).json({ message: "Atualizado com sucesso", item });
+    return res.status(200).json({ message: "Atualizado com sucesso", item: item });
 }
 
 async function delete_item(req, res) {
