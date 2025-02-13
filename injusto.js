@@ -12,10 +12,10 @@ describe('Testes CRUD para API de Usuários', () => {
         const res = await request(app)
             .post('/user/create')
             .send({
-                login: 'Vitor Amaro 10',
-                email: 'jorge@gmail.com',
+                login: 'Vitor Amaro 21',
+                email: 'jorge21@gmail.com',
                 password: '28062006',
-                cep: '135732149',
+                cep: '13573214',
                 born:'2000-01-03',
                 gender:'masculino'
             });
@@ -40,7 +40,7 @@ describe('Testes CRUD para API de Usuários', () => {
             .get(`/user/show/${userId}`)
 
         expect(res.body).toHaveProperty('user');
-        expect(res.body.user).toHaveProperty('email', 'jorge@gmail.com');
+        expect(res.body.user).toHaveProperty('email', 'jorge9@gmail.com');
         expect(res.body).toHaveProperty('message', 'Usuario nao encontrado');
        
         
@@ -84,7 +84,7 @@ describe('Testes CRUD para API de Usuários', () => {
 
         expect(res.status).toBe(201);
         expect(res.body).toHaveProperty('item');
-        itemid = res.body.itens.id;
+        itemid = res.body.item.id;
     });
 
 
@@ -186,14 +186,14 @@ describe('Testes CRUD para API de Usuários', () => {
         expect(res.body).toHaveProperty('item');
     });
 
-    let idpary
+    let idparty
     it('deve criar uma festa', async () => {
         const res = await request(app)
             .post('/party/create')
             .send({
                 name: "Festa Infantil",
-                cart_id: cartid,
-                user_id: userId,
+                cart_id: 1,
+                user_id: 1,
                 tipo_pag: "cartao",
                 cpf_cnpj:"999.999.999-99",
                 nome_cartao:"nuu",
@@ -205,7 +205,7 @@ describe('Testes CRUD para API de Usuários', () => {
         expect(res.status).toBe(200);
         expect(res.body).toHaveProperty('message','Sucesso');
         expect(res.body).toHaveProperty('party');
-        idpary = res.body.party.id
+        idparty = res.body.party.id
     });
 
     it('pagamento com pix', async ()=> {
@@ -213,8 +213,8 @@ describe('Testes CRUD para API de Usuários', () => {
             .post('/party/create')
             .send({
                 name: "Festa Infantil",
-                cart_id: cartid,
-                user_id: userId,
+                cart_id: 1,
+                user_id: 1,
                 tipo_pag: "pix",
                 valor: 2000
             })
@@ -235,15 +235,15 @@ describe('Testes CRUD para API de Usuários', () => {
 
     it('Atualizar Festa', async () => {
         const res = await request(app)
-            .put(`/party/update/${idpary}`)
+            .put(`/party/update/${idparty}`)
             .send({
                 name: "Festa Infantil",
-                cart_id: cartid,
-                user_id: userId,
+                cart_id: 1,
+                user_id: 1,
                 pix: "pix",
                 cpf_cnpj:"",
-                nome_do_cartao:"",
-                numero_do_cartao:"",
+                nome_cartao:"",
+                numero_cartao:"",
                 validade:"",
                 CVV:""
             });
@@ -255,7 +255,7 @@ describe('Testes CRUD para API de Usuários', () => {
 
     it('Deletar Festa', async () => {
         const res = await request(app)
-            .delete(`/party/del/${idpary}`)
+            .delete(`/party/del/${idparty}`)
         
         expect(res.status).toBe(200);
         expect(res.body).toHaveProperty('message','Foi de base');
