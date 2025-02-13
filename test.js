@@ -12,7 +12,7 @@ describe('Testes CRUD para API de Usuários', () => {
         const res = await request(app)
             .post('/user/create')
             .send({
-                login: 'Vitor Amaro 3',
+                login: 'Vitor Amaro 10',
                 email: 'jorge@gmail.com',
                 password: '28062006',
                 cep: '135732149',
@@ -20,6 +20,8 @@ describe('Testes CRUD para API de Usuários', () => {
                 gender:'masculino'
             });
 
+        expect(res.body).toHaveProperty('message');
+        console.log(res.body.message)
         expect(res.status).toBe(200);
         expect(res.body).toHaveProperty('user');
         userId = res.body.user.id;
