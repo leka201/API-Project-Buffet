@@ -57,8 +57,8 @@ async function read_party(req, res) {
         }
 
         await party.update({ name, cart_id, user_id, tipo_pag, valor});
-
-        res.status(200).json(party);
+        
+        res.status(200).json({message: "Festa Atualizada com Sucesso"},party)
     } catch(error){
         console.error(error);
         res.status(500).json({message:"Erro no servidor"});

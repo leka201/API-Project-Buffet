@@ -9,7 +9,7 @@ Content-Type: application/json
     "tipo_pag": "cartao",
     "cpf_cnpj":"999.999.999-99",
     "nome_cartao":"nuu",
-    "número_cartao":"9999 9999 9999 9999",
+    "numero_cartao":"9999 9999 9999 9999",
     "validade":"99/99",
     "CVV":"999",
     "valor": 2000
@@ -40,11 +40,11 @@ Content-Type: application/json
     "cart_id": 1,
     "user_id": 1,
     "pix": "pix",
-    "cpf/cnpj":"",
-    "nome do cartão":"",
-    "número do cartão":"",
+    "cpf_cnpj":"",
+    "nome_cartao":"",
+    "numero_cartao":"",
     "validade":"",
-    "(CVV)":""
+    "CVV":""
 }
 
 ###
