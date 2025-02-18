@@ -74,7 +74,128 @@ describe('Testes CRUD para API de Usuários', () => {
                  decorations: "Cesta de Futebol",
                  items:"Cadeira Infantil",
                  food: "Suco de Frutas",
-                 imagem: "https://i.imgur.com/jcg4pBt.png" 
+                 imagem: "https://i.imgur.com/jcg4pBt.png", 
+
+                 name: "Balões de Futebol",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/P1Irwdd.png",
+
+                 name: "Painel de Futebol",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/rJfGa7j.png",
+
+                 name: "Cestas de Pipas Coloridas",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/lpqbjHZ.png",
+
+                 name: "Guirlandas de Futebol",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/Vuljog4.png",
+
+                 name: "Pipoca em Caixinhas",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/u6gpKBW.png",
+
+                 name: "Mini Hot Dogs",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/aeE5CkE.png",
+
+                 name: "Cupcakes Decorados",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/Mi6dD8X.png",
+
+                 name: "Biscoitos Decorados",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/47ruFAK.png",
+
+                 name: "Suco de Frutas",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/29ci6sZ.png",
+
+                 name: "Mesa de Princesas",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/YKEVhEw.png",
+
+                 name: "Toalha de Mesa Infantil",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/gKaWKtz.png",
+
+                 name: "Pratos e Copos Coloridos",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/eRr2Sys.png",
+
+                 name: "Talheres de Plástico",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/XD5A3Bk.png",
+
+                 name: "Cadeira Infantil",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/FL1NumI.png",
+
+                 name: "Arranjo de Flores para 15 Anos",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/3prHXqH.jpeg",
+
+                 name: "Painel de LED Personalizado",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/a4eYBE4.jpeg",
+
+                 name: "Cortina de Luzes",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/E5PtnwX.png",
+
+                 name: "Balcão de Recepção",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/URQ4H9K.png",
+
+                 name: "Centro de Mesa com Velas",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/BR9tkKY.png",
+
+                 name: "Mini Sanduíches Gourmet",
+                 decorations: "Cesta de Futebol",
+                 items:"Cadeira Infantil",
+                 food: "Suco de Frutas",
+                 imagem: "https://i.imgur.com/Ll2EXcZ.jpeg",
+        
             });
 
         expect(res.status).toBe(201);

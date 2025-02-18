@@ -3,12 +3,145 @@ POST http://localhost:3001/item/create HTTP/1.1
 Content-Type: application/json
  
 {
+    "name": "Decoração de Futebol",
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas",
+    "imagem": "https://i.imgur.com/jcg4pBt.png"
+}
+
+###
+POST http://localhost:3001/item/create HTTP/1.1
+Content-Type: application/json
+ 
+{
+    "name": "Balões de Futebol",
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas",
+    "imagem": "https://i.imgur.com/P1Irwdd.png"
+}
+
+###
+POST http://localhost:3001/item/create HTTP/1.1
+Content-Type: application/json
+ 
+{
+    "name": "Painel de Futebol",
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas",
+    "imagem": "https://i.imgur.com/rJfGa7j.png" 
+}
+
+###
+POST http://localhost:3001/item/create HTTP/1.1
+Content-Type: application/json
+ 
+{
+    "name": "Cestas de Pipas Coloridas",
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas",
+    "imagem": "https://i.imgur.com/lpqbjHZ.png" 
+}
+
+###
+POST http://localhost:3001/item/create HTTP/1.1
+Content-Type: application/json
+ 
+{
+    "name": "Guirlandas de Futebol",
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas",
+    "imagem": "https://i.imgur.com/Vuljog4.png" 
+}
+
+###
+POST http://localhost:3001/item/create HTTP/1.1
+Content-Type: application/json
+ 
+{
+    "name": "Pipoca em Caixinhas",
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas",
+    "imagem": "https://i.imgur.com/u6gpKBW.png"
+}
+
+###
+POST http://localhost:3001/item/create HTTP/1.1
+Content-Type: application/json
+ 
+{
+    "name": "Mini Hot Dogs",
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas",
+    "imagem": "https://i.imgur.com/aeE5CkE.png"
+}
+
+###
+POST http://localhost:3001/item/create HTTP/1.1
+Content-Type: application/json
+ 
+{
+    "name": "Cupcakes Decorados",
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas",
+    "imagem": "https://i.imgur.com/Mi6dD8X.png"
+}
+
+###
+POST http://localhost:3001/item/create HTTP/1.1
+Content-Type: application/json
+ 
+{
+    "name": "Biscoitos Decorados",
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas",
+    "imagem": "https://i.imgur.com/47ruFAK.png"
+}
+
+###
+POST http://localhost:3001/item/create HTTP/1.1
+Content-Type: application/json
+ 
+{
+    "name": "Suco de Frutas",
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas",
+    "imagem": "https://i.imgur.com/29ci6sZ.png" 
+}
+
+###
+POST http://localhost:3001/item/create HTTP/1.1
+Content-Type: application/json
+ 
+{
+    "name": "Mesa de Princesas",
+    "decorations": "Cesta de Futebol",
+    "items": "Cadeira Infantil",
+    "food": "Suco de Frutas",
+    "imagem": "https://i.imgur.com/YKEVhEw.png"
+}
+
+###
+POST http://localhost:3001/item/create HTTP/1.1
+Content-Type: application/json
+ 
+{
     "name": "Mini Sanduíces Gourmet",
     "decorations": "Cesta de Futebol",
     "items": "Cadeira Infantil",
     "food": "Suco de Frutas",
     "imagem": "https://i.imgur.com/Ll2EXcZ.jpeg" 
 }
+
 
 ###
 GET http://localhost:3001/item/show/29 HTTP/1.1
