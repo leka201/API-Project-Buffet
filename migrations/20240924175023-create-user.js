@@ -37,13 +37,11 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW, // Opcional: define valor padrão
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW, // Opcional: define valor padrão
+        type: Sequelize.DATE
       },
     });
   },
